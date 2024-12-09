@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+    <h1 class="home-title">Les sweat-shirts du moment !!!</h1>
+    <div class="row align-items-center text-center cards-container">
+        {% for topSweatShirt in topSweatShirts %}
+            <div class="col-sm-12 col-md-6 col-lg-4 card-sweat-shirt">
+                <img class="top-sweat-shirt-img" src="{{ asset(topSweatShirt.img) }}" alt="Sweat du moment"/>
+                <p class="top-sweat-shirt-name">{{ topSweatShirt.name }}</p>
+                <p class="top-sweat-shirt-price"><strong>Prix : </strong>{{ topSweatShirt.price }} $</p>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
