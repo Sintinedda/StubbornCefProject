@@ -29,6 +29,12 @@ class SweatShirt
     #[ORM\ManyToMany(targetEntity: SweatSizes::class, mappedBy: 'sweatshirt')]
     private Collection $sweatSizes;
 
+    #[ORM\Column]
+    private ?bool $isTop = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
+
     public function __construct()
     {
         $this->sweatSizes = new ArrayCollection();
@@ -93,6 +99,30 @@ class SweatShirt
         if ($this->sweatSizes->removeElement($sweatSize)) {
             $sweatSize->removeSweatshirt($this);
         }
+
+        return $this;
+    }
+
+    public function isTop(): ?bool
+    {
+        return $this->isTop;
+    }
+
+    public function setTop(bool $isTop): static
+    {
+        $this->isTop = $isTop;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): static
+    {
+        $this->img = $img;
 
         return $this;
     }
