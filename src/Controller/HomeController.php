@@ -15,7 +15,7 @@ class HomeController extends AbstractController
     {   
         $repository = $entityManager -> getRepository(SweatShirt::class);
         $topSweatShirts = $repository -> findBy(['isTop'=> true]);
-        return $this->render('home/index.html.twig', [
+        return $this->render('home.html.twig', [
             'controller_name' => 'HomeController',
             'topSweatShirts' => $topSweatShirts
         ]);

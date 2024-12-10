@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de connexion à Stubborn{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+{% endblock %}
+
+{% block body_id 'login' %}
+
+{% block main %}
+
+{% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+    
+    <div class="login-card">
+        <form action="{{ path('app_login') }}" method="post">
+            <fieldset>
+                <legend class="login-form-legend">Se connecter</legend>
+                <p><span class="form-login-span"></span></p>
+                <div class="login-form-group">
+                    <label for="username" class="login-form-label">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" class="login-form-input"/>
+                </div>
+                <div class="login-form-group">
+                    <label for="password" class="login-form-label">Mot de passe</label>
+                    <input type="password" id="password" name="_password" class="login-form-input"/>
+                </div>
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <input type="submit" value="Se Connecter" class="login-form-btn"/>
+                <p class="login-form-txt">
+                    <a class="login-form-link" href="">Mot de passe oublié</a>
+                </p>
+                <p><span class="form-login-span"></span></p>
+                <p class="login-form-txt">Pas encore inscrit ?</p>
+                <button class="login-form-btn">
+                    <a href="">Créer un compte</a>
+                </button>
+            </fieldset>
+        </form>
+    </div>
+{% endblock %}
