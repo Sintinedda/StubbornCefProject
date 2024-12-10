@@ -1,13 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Page d'accueil à Stubborn{% endblock %}
 
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'home' %}
+
+{% block main %}
     <h1 class="home-title">Les sweat-shirts du moment !!!</h1>
     <div class="row align-items-center text-center cards-container">
         {% for topSweatShirt in topSweatShirts %}
@@ -18,5 +20,4 @@
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}

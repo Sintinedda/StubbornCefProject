@@ -2,7 +2,7 @@
 
 namespace App\Command;
 
-use App\Entity\SweatShirt;
+use APP\Entity\SweatShirt;
 use App\Repository\SweatShirtRepository;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -12,13 +12,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 #[AsCommand(
-    name: 'app:list-sweatshirts',
+    name: 'app:sweats-list',
     description: 'List all the existing sweat-shirts',
 )]
-class ListSweatShirtCommand extends Command
+class SweatListCommand extends Command
 {
     public function __construct(
-        private readonly SweatShirtRepository $sweatShirts
+        private readonly SweatShirtRepository $sweats
     ) {
         parent::__construct();
     }
@@ -26,35 +26,34 @@ class ListSweatShirtCommand extends Command
     protected function configure(): void
     {
         $this
-            ->setHelp('This command allow you to get the sweat-shirts list')
+            -> setHelp('This command allow you to get the full sweat-shirts list')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $allSweatShirts = $this -> sweatShirts -> findAll('SELECT * FROM sweat_shirt');
-        
-        $createSweatShirtArray = static function (SweatShirt $sweatShirt): array {
+        $allSweats = $this -> sweats -> findAll('SELECT * FROM sweat_shirt');
+
+        $createSweatArray = static function (SweatShirt $sweat): array {
             return [
-                $sweatShirt -> getId(),
-                $sweatShirt -> getName(),
-                $sweatShirt -> getPrice(),
-                $sweatShirt -> getSweatSizes(),
-                $sweatShirt -> isTop()
+                $sweat -> getId(),
+                $sweat -> getName(),
+                $sweat -> getPrice(),
+                $sweat -> isTop()
             ];
         };
 
-        $sweatShirtsAsPlainArrays = array_map($createSweatShirtArray, $allSweatShirts);
+        $sweatsAsPlainArrays = array_map($createSweatArray, $allSweats);
 
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
         $io -> table(
-            ['ID', 'Name', 'Price', 'Sizes', 'Top'],
-            $sweatShirtsAsPlainArrays
+            ['ID', 'Name', 'Price', 'Top'],
+            $sweatsAsPlainArrays
         );
 
-        $sweatShirtsAsTable = $bufferedOutput -> fetch();
-        $output -> write($sweatShirtsAsTable);
+        $sweatsAsTable = $bufferedOutput -> fetch();
+        $output -> write($sweatsAsTable);
 
         return Command::SUCCESS;
     }
