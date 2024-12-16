@@ -1,0 +1,50 @@
+
+{% for sweat in sweats %}
+        <div class="form-container">
+                <form name="edit_{{ sweat.id }}" method="post" action="" />
+                        <label for="img" onclick="editImg('img', 'form-img')">
+                                <img src="{{ asset('' ~ sweat.img) }}" id="form-img" class="form-img" alt="Sweat {{ sweat.name }}"/>
+                        </label>
+                        <input type="file" id="img" name="img" value="{{ sweat.img }}" class="edit-form-img-input"/>
+                        <div class="table-form">
+                                <div class="edit-form-groups">
+                                        <label for="name">Nom</label>
+                                        <input type="text" name="_name" id="name" value="{{ sweat.name }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="price">Prix</label>
+                                        <input type="number" name="_price" id="price" value="{{ sweat.price }}" min="0" step="0.01" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="stockXs">Stock XS</label>
+                                        <input type="number" name="_stockXs" id="stockXs" value="{{ sweat.stockXs }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="stockS">Stock S</label>
+                                        <input type="number" name="_stockS" id="stockS" value="{{ sweat.stockS }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="stockM">Stock M</label>
+                                        <input type="number" name="_stockM" id="stockM" value="{{ sweat.stockM }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="stockL">Stock L</label>
+                                        <input type="number" name="_stockL" id="stockL" value="{{ sweat.stockL }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="stockXl">Stock Xl</label>
+                                        <input type="number" name="_stockXl" id="stockXl" value="{{ sweat.stockXl }}" />
+                                </div>
+                                <div class="edit-form-groups">
+                                        <label for="isTop">Top</label>
+                                        <input type="checkbox" name="_isTop" id="isTop" />
+                                </div>
+                        </div>
+                        <div class="edit-form-submits">
+                                <input type="hidden" id="edit{{ sweat.id }}__token" name="edit{{ sweat.id }}[_token]" data-controller="csrf-protection" autocomplete="off" value="csrf-token">
+                                <input type="submit" class="edit-form-input" value="Modifier" />
+                                <input type="submit" class="edit-form-input" value="Supprimer" formaction="" />  
+                        </div>
+                </form>
+        </div>
+{% endfor %}

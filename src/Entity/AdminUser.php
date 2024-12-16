@@ -11,6 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NAME', fields: ['name'])]
 class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    final public const ROLE_ADMIN = 'ROLE_ADMIN';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -70,7 +72,7 @@ class AdminUser implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles[] = 'ROLE_ADMIN';
 
         return array_unique($roles);
     }

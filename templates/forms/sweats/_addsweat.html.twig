@@ -1,0 +1,16 @@
+<div class="form-container">
+    {{ form_start(add_sweat_form) }}
+        {{ form_row(add_sweat_form.img, { 'label': ' '}) }}
+        <div class="table-form">
+            {{ form_row(add_sweat_form.name, { 'label': 'Nom' }) }}
+            {{ form_row(add_sweat_form.price, { 'label': 'Prix'}) }}
+            {{ form_row(add_sweat_form.stock_xs, { 'label': 'Stock XS'}) }}
+            {{ form_row(add_sweat_form.stock_s, { 'label': 'Stock S'}) }}
+            {{ form_row(add_sweat_form.stock_m, { 'label': 'Stock M'}) }}
+            {{ form_row(add_sweat_form.stock_l, { 'label': 'Stock L'}) }}
+            {{ form_row(add_sweat_form.stock_xl, { 'label': 'Stock XL'}) }}
+            {{ form_row(add_sweat_form.isTop, { 'label': 'Top' }) }}
+        </div>
+            <input type="submit" class="user-form-submit" value="Ajouter" />
+    {{ form_end(add_sweat_form) }}
+</div>

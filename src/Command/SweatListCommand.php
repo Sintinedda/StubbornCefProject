@@ -39,7 +39,12 @@ class SweatListCommand extends Command
                 $sweat -> getId(),
                 $sweat -> getName(),
                 $sweat -> getPrice(),
-                $sweat -> isTop()
+                $sweat -> isIsTop(),
+                $sweat -> getStockXs(),
+                $sweat -> getStockS(),
+                $sweat -> getStockM(),
+                $sweat -> getStockL(),
+                $sweat -> getStockXl()
             ];
         };
 
@@ -48,7 +53,7 @@ class SweatListCommand extends Command
         $bufferedOutput = new BufferedOutput();
         $io = new SymfonyStyle($input, $bufferedOutput);
         $io -> table(
-            ['ID', 'Name', 'Price', 'Top'],
+            ['ID', 'Name', 'Price', 'Top', 'Stock XS', 'Stock S', 'Stock M', 'Stock L', 'Stock XL'],
             $sweatsAsPlainArrays
         );
 
