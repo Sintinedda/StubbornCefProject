@@ -3,11 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\SweatShirtRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 #[ORM\Entity(repositoryClass: SweatShirtRepository::class)]
 class SweatShirt
@@ -23,21 +19,34 @@ class SweatShirt
     #[ORM\Column]
     private ?float $price = null;
 
-    /**
-     * @var Collection<int, SweatSizes>
-     */
-    #[ORM\ManyToMany(targetEntity: SweatSizes::class, mappedBy: 'sweatshirt')]
-    private Collection $sweatSizes;
-
     #[ORM\Column]
-    private ?bool $isTop = null;
+    private ?bool $isTop;
 
     #[ORM\Column(length: 255)]
     private ?string $img = null;
 
-    public function __construct()
-    {
-        $this->sweatSizes = new ArrayCollection();
+    #[ORM\Column]
+    private ?int $stock_xs;
+
+    #[ORM\Column]
+    private ?int $stock_s;
+
+    #[ORM\Column]
+    private ?int $stock_m;
+
+    #[ORM\Column]
+    private ?int $stock_l;
+
+    #[ORM\Column]
+    private ?int $stock_xl;
+
+    public function __construct() {
+        $this -> stock_xs = 0;
+        $this -> stock_s = 0;
+        $this -> stock_m = 0;
+        $this -> stock_l = 0;
+        $this -> stock_xl = 0;
+        $this -> isTop = false;
     }
 
     public function getId(): ?int
@@ -69,46 +78,12 @@ class SweatShirt
         return $this;
     }
 
-    public static function loadaValidatorMetaData(ClassMetadata $metadata): void {
-        $metadata -> addPropertyConstraint(
-            'size',
-            new Assert\Choice(['XS', 'S', 'M', 'L', 'XL'])
-        );
-    }
-
-    /**
-     * @return Collection<int, SweatSizes>
-     */
-    public function getSweatSizes(): Collection
-    {
-        return $this->sweatSizes;
-    }
-
-    public function addSweatSize(SweatSizes $sweatSize): static
-    {
-        if (!$this->sweatSizes->contains($sweatSize)) {
-            $this->sweatSizes->add($sweatSize);
-            $sweatSize->addSweatshirt($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSweatSize(SweatSizes $sweatSize): static
-    {
-        if ($this->sweatSizes->removeElement($sweatSize)) {
-            $sweatSize->removeSweatshirt($this);
-        }
-
-        return $this;
-    }
-
-    public function isTop(): ?bool
+    public function isIsTop(): ?bool
     {
         return $this->isTop;
     }
 
-    public function setTop(bool $isTop): static
+    public function setIsTop(bool $isTop): static
     {
         $this->isTop = $isTop;
 
@@ -123,6 +98,66 @@ class SweatShirt
     public function setImg(string $img): static
     {
         $this->img = $img;
+
+        return $this;
+    }
+
+    public function getStockXs(): ?int
+    {
+        return $this->stock_xs;
+    }
+
+    public function setStockXs(int $stock_xs): static
+    {
+        $this->stock_xs = $stock_xs;
+
+        return $this;
+    }
+
+    public function getStockS(): ?int
+    {
+        return $this->stock_s;
+    }
+
+    public function setStockS(int $stock_s): static
+    {
+        $this->stock_s = $stock_s;
+
+        return $this;
+    }
+
+    public function getStockM(): ?int
+    {
+        return $this->stock_m;
+    }
+
+    public function setStockM(int $stock_m): static
+    {
+        $this->stock_m = $stock_m;
+
+        return $this;
+    }
+
+    public function getStockL(): ?int
+    {
+        return $this->stock_l;
+    }
+
+    public function setStockL(int $stock_l): static
+    {
+        $this->stock_l = $stock_l;
+
+        return $this;
+    }
+
+    public function getStockXl(): ?int
+    {
+        return $this->stock_xl;
+    }
+
+    public function setStockXl(int $stock_xl): static
+    {
+        $this->stock_xl = $stock_xl;
 
         return $this;
     }

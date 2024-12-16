@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\AdminUser;
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,10 +15,15 @@ final class LoginController extends AbstractController
     #[Route('/login', name: 'app_login')]
     public function login(
         #[CurrentUser] ?User $user,
+        #[CurrentUser] ?AdminUser $admin,
         AuthenticationUtils $helper
     ): Response {
         if ($user) {
             return $this -> redirectToRoute('');
+        }
+
+        if ($admin) {
+            return $this -> redirectToRoute('app_admin');
         }
 
         return $this->render('login.html.twig', [

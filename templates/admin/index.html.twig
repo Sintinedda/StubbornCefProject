@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page administrateur gestion{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/bo.css') }}" rel="stylesheet" />
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent () }}
+    <script src="{{ asset('js/editImg.js') }}"></script>
+{% endblock %}
+
+{% block body_id 'back-office' %}
+
+{% block main %}
+
+    <h1 class="back-off-title">Bonjour {{ admin.name }}.</h1>
+    
+    <div class="forms-container">
+        {% include ('forms/sweats/_addsweat.html.twig') %}
+
+        {% include ('forms/sweats/_editsweat.html.twig') %}
+    </div>
+
+{% endblock %}

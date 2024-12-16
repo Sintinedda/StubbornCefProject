@@ -22,7 +22,7 @@ class AppFixtures extends Fixture
         $sweatShirt = new SweatShirt();
         $sweatShirt -> setName('Sweat1');
         $sweatShirt -> setPrice(10);
-        $sweatShirt -> setTop(true);
+        $sweatShirt -> setIsTop(true);
         $sweatShirt -> setImg('img/sweatShirts/1.jpeg');
         $manager -> persist($sweatShirt);
 
