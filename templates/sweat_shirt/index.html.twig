@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SweatShirt index{% endblock %}
+
+{% block body %}
+    <h1>SweatShirt index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>IsTop</th>
+                <th>Img</th>
+                <th>Stock_xs</th>
+                <th>Stock_s</th>
+                <th>Stock_m</th>
+                <th>Stock_l</th>
+                <th>Stock_xl</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sweat_shirt in sweat_shirts %}
+            <tr>
+                <td>{{ sweat_shirt.id }}</td>
+                <td>{{ sweat_shirt.name }}</td>
+                <td>{{ sweat_shirt.price }}</td>
+                <td>{{ sweat_shirt.isTop ? 'Yes' : 'No' }}</td>
+                <td>{{ sweat_shirt.img }}</td>
+                <td>{{ sweat_shirt.stockXs }}</td>
+                <td>{{ sweat_shirt.stockS }}</td>
+                <td>{{ sweat_shirt.stockM }}</td>
+                <td>{{ sweat_shirt.stockL }}</td>
+                <td>{{ sweat_shirt.stockXl }}</td>
+                <td>
+                    <a href="{{ path('app_sweat_shirt_show', {'id': sweat_shirt.id}) }}">show</a>
+                    <a href="{{ path('app_sweat_shirt_edit', {'id': sweat_shirt.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_sweat_shirt_new') }}">Create new</a>
+{% endblock %}

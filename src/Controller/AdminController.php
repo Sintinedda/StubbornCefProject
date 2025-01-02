@@ -6,7 +6,6 @@ use App\Entity\AdminUser;
 use App\Entity\SweatShirt;
 use App\Form\SweatType;
 use App\Repository\SweatShirtRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,27 +20,24 @@ class AdminController extends AbstractController
         #[CurrentUser] AdminUser $admin,
         SweatShirtRepository $sweats,
         Request $request,
-        EntityManagerInterface $manager
     ): Response {
+
         $newSweat = new SweatShirt();
         $sweats = $sweats -> findAll();
         $addSweatForm = $this -> createForm(SweatType::class, $newSweat);
         $addSweatForm -> handleRequest($request);
-        
 
-        if ($addSweatForm -> isSubmitted() && $addSweatForm -> isValid()) {
-            $newSweat = $addSweatForm -> getData();
-            $manager -> persist($newSweat);
-            $manager -> flush();
-            $this -> addFlash('success', 'sweat.created_successfully');
-
-            return $this -> redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
+        foreach ($sweats as $editSweat) {
+            $editSweatForms = $this -> createForm(SweatType::class, $editSweat) -> createView();
+            $arrayForms[] = $editSweatForms;
         }
+        
         return $this->render('admin/index.html.twig', [
             'controller_name' => 'AdminController',
             'admin' => $admin,
             'add_sweat_form' => $addSweatForm,
-            'sweats' => $sweats
+            'sweats' => $sweats,
+            'array_forms' => $arrayForms
         ]);
     }
 }
