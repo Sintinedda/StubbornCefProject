@@ -19,15 +19,17 @@ form {
 
 form div {
     display: table-row;
+    margin: auto;
 }
 
-.user-form-submit,
+.add-form-submit,
 .edit-form-submits {
     display: inline-block;
 }
 
 form div label {
     display: table-cell;
+    padding-right: 15px;
 }
 
 form div input {
@@ -37,6 +39,10 @@ form div input {
 
 .form-img {
     width: 50%;
+}
+
+.edit-form input[type=file] {
+    display: none;
 }
 
 @media screen and (min-width:992px) {
@@ -65,18 +71,22 @@ form div input {
         width: 80%;
     }
 
-    .user-form-submit, 
+    .add-form-submit, 
     .edit-form-submits {
         position: absolute;
-        right: 50px;
-        width: 100px;
-        margin-top: 100px;
+        right: 5vw;
+        width: 10vw;
+        margin-top: 10vw;
 
     }
 
     .edit-form-submits {
         display: flex;
         right: 140px;
+    }
+
+    .edit-form-submits:last-child {
+        margin-left: 50px;
     }
 
     .edit-form-input {
@@ -87,9 +97,4 @@ form div input {
     .form-img {
         width: 100%;
     }
-
-    .edit-form-img-input {
-        display: none;
-    }
-    
 }

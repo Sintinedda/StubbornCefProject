@@ -31,6 +31,7 @@ security:
                 login_path: app_login
                 check_path: app_login
                 enable_csrf: true
+                default_target_path: app_login_redirect
             entry_point: form_login
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true

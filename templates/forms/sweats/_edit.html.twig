@@ -1,0 +1,26 @@
+{% for sweat in sweats %}
+    <div class="form-container edit-form">
+        {{ form_start(array_forms[loop.index0]) }}
+            <div>
+                <label for="img-{{ sweat.id }}" onclick="editImg('img-{{ sweat.id }}', 'form-img-{{ sweat.id }}')">
+                    <img src="{{ asset('/uploads/images/' ~ sweat.img) }}" id="form-img-{{ sweat.id }}" class="form-img" alt="Sweat {{ sweat.name }}"/>
+                </label>
+            </div>
+            {{ form_row(array_forms[loop.index0].img, { 'id': 'img-' ~ sweat.id }) }}
+            <div class="table-form">
+                {{ form_row(array_forms[loop.index0].name, { 'label': 'Nom' }) }}
+                {{ form_row(array_forms[loop.index0].price, { 'label': 'Prix'}) }}
+                {{ form_row(array_forms[loop.index0].stock_xs, { 'label': 'Stock XS'}) }}
+                {{ form_row(array_forms[loop.index0].stock_s, { 'label': 'Stock S'}) }}
+                {{ form_row(array_forms[loop.index0].stock_m, { 'label': 'Stock M'}) }}
+                {{ form_row(array_forms[loop.index0].stock_l, { 'label': 'Stock L'}) }}
+                {{ form_row(array_forms[loop.index0].stock_xl, { 'label': 'Stock XL'}) }}
+                {{ form_row(array_forms[loop.index0].isTop, { 'label': 'Top' }) }}
+            </div>
+            <div class="edit-form-submits">
+                <input class="edit-form-submit" type="submit" value="Modifier" action="/sweat/shirt/{{ sweat.id }}/edit" />
+                <input type="submit" value="Supprimer" action="/sweat/shirt/{{ sweat.id }}" />
+            </div>
+        {{ form_end(array_forms[loop.index0]) }}
+    </div>
+{% endfor %}
