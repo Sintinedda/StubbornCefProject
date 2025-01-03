@@ -1,0 +1,103 @@
+.product-container {
+    padding-bottom: 8vw;
+}
+
+.product-img {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.product-info {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 50px;
+    font-size: 4vw;
+}
+
+#addToCart {
+    padding-bottom: 4vw;
+}
+
+.product-form-group {
+    border: 1px solid black;
+    background-color: white;
+}
+
+.product-form-label {
+    text-align: center;
+    border-bottom: 1px solid black;
+    width: 100%;
+    font-weight: 500;
+}
+
+.product-form-sizes {
+    border: none;
+    width: 20vw;
+}
+
+.product-form-sizes option {
+    padding-left: 3vw;
+}
+
+.product-submit {
+    display: block;
+    margin: auto;
+    font-weight: 500;
+}
+
+.product-disabled {
+    font-size: 3vw;
+    text-align: center;
+}
+
+.product-link {
+    display: block;
+    margin: auto;
+}
+
+.product-submit,
+.product-link {
+    padding: 1vw 4vw;
+    border-radius: 5%/25%;
+}
+
+@media screen and (min-width:768px) {
+    
+    .product-container {
+        display: flex;
+    }
+
+    .product-img {
+        width: 40%;
+        margin-right: 4vw;
+    }
+
+    .product-items {
+        width: 60%;
+    }
+
+    .product-info {
+        font-size: 3vw;
+    }
+
+    .product-disabled {
+        font-size: 2.5vw;
+    }
+
+}
+
+@media screen and (min-width:992px) {
+    
+    .card-name {
+        font-size: 3vw;
+    }
+
+    .card-price {
+        font-size: 2.2vw;
+    }
+
+    .card-link-to-product {
+        width: 8vw;
+    }
+
+}

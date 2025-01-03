@@ -1,0 +1,58 @@
+.cards-container {
+    margin: 20px;
+    padding-bottom: 30px;
+}
+
+.col {
+    margin-bottom: 30px;
+}
+
+.card {
+    border: solid 2px black;
+}
+
+.card-img {
+    width: 100%;
+    padding: 20px 10px;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-name {
+    font-size: 4vw;
+    font-weight: 500;
+}
+
+.card-price {
+    font-size: 3vw;
+}
+
+.card-name,
+.card-price {
+    text-align: start;
+    margin-left: 30px;
+}
+
+.card-link-to-product {
+    width: 15vw;
+}
+
+@media screen and (min-width:992px) {
+    
+    .card-name {
+        font-size: 3vw;
+    }
+
+    .card-price {
+        font-size: 2.2vw;
+    }
+
+    .card-link-to-product {
+        width: 8vw;
+    }
+
+}

@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/sweat/shirt')]
+#[Route('/product')]
 final class SweatShirtController extends AbstractController
 {
-    #[Route(name: 'app_sweat_shirt_index', methods: ['GET'])]
+    #[Route('s', name: 'app_sweat_index', methods: ['GET'])]
     public function index(SweatShirtRepository $sweatShirtRepository): Response
     {
         return $this->render('sweat_shirt/index.html.twig', [
@@ -46,7 +46,7 @@ final class SweatShirtController extends AbstractController
         }
     }
 
-    #[Route('/{id}', name: 'app_sweat_shirt_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_sweat_show', methods: ['GET'])]
     public function show(SweatShirt $sweatShirt): Response
     {
         return $this->render('sweat_shirt/show.html.twig', [

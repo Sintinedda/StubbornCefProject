@@ -1,51 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SweatShirt index{% endblock %}
+{% block title %}Liste des produits{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/products.css') }}" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
-    <h1>SweatShirt index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>IsTop</th>
-                <th>Img</th>
-                <th>Stock_xs</th>
-                <th>Stock_s</th>
-                <th>Stock_m</th>
-                <th>Stock_l</th>
-                <th>Stock_xl</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 cards-container">
         {% for sweat_shirt in sweat_shirts %}
-            <tr>
-                <td>{{ sweat_shirt.id }}</td>
-                <td>{{ sweat_shirt.name }}</td>
-                <td>{{ sweat_shirt.price }}</td>
-                <td>{{ sweat_shirt.isTop ? 'Yes' : 'No' }}</td>
-                <td>{{ sweat_shirt.img }}</td>
-                <td>{{ sweat_shirt.stockXs }}</td>
-                <td>{{ sweat_shirt.stockS }}</td>
-                <td>{{ sweat_shirt.stockM }}</td>
-                <td>{{ sweat_shirt.stockL }}</td>
-                <td>{{ sweat_shirt.stockXl }}</td>
-                <td>
-                    <a href="{{ path('app_sweat_shirt_show', {'id': sweat_shirt.id}) }}">show</a>
-                    <a href="{{ path('app_sweat_shirt_edit', {'id': sweat_shirt.id}) }}">edit</a>
-                </td>
-            </tr>
+            <div class="col">
+                <div class="card">
+                    <img class="card-img" src="{{ asset('/uploads/images/' ~ sweat_shirt.img) }}" alt="{{ sweat_shirt.name }}" />
+                    <div class="card-body">
+                        <div class="card-texts">
+                            <p class="card-name">{{ sweat_shirt.name }}</p>
+                            <p class="card-price">{{ sweat_shirt.price }} €</p>
+                        </div>
+                        <a href="{{ path('app_sweat_show', {'id': sweat_shirt.id}) }}">
+                            <input class="card-link-to-product" type="button" value="Voir" />
+                        </a>
+                    </div>
+                </div>
+            </div>
         {% else %}
-            <tr>
-                <td colspan="11">no records found</td>
-            </tr>
+            <p>Aucun produit trouvé</p>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 
-    <a href="{{ path('app_sweat_shirt_new') }}">Create new</a>
 {% endblock %}
