@@ -1,58 +1,69 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}SweatShirt{% endblock %}
+{% block title %}Produit {{ sweat_shirt.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/product.css') }}" rel="stylesheet"/>
+{% endblock %}
 
 {% block body %}
-    <h1>SweatShirt</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ sweat_shirt.id }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ sweat_shirt.name }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ sweat_shirt.price }}</td>
-            </tr>
-            <tr>
-                <th>IsTop</th>
-                <td>{{ sweat_shirt.isTop ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Img</th>
-                <td>{{ sweat_shirt.img }}</td>
-            </tr>
-            <tr>
-                <th>Stock_xs</th>
-                <td>{{ sweat_shirt.stockXs }}</td>
-            </tr>
-            <tr>
-                <th>Stock_s</th>
-                <td>{{ sweat_shirt.stockS }}</td>
-            </tr>
-            <tr>
-                <th>Stock_m</th>
-                <td>{{ sweat_shirt.stockM }}</td>
-            </tr>
-            <tr>
-                <th>Stock_l</th>
-                <td>{{ sweat_shirt.stockL }}</td>
-            </tr>
-            <tr>
-                <th>Stock_xl</th>
-                <td>{{ sweat_shirt.stockXl }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="product-container">
+        <img class="product-img" src="{{ asset('/uploads/images/' ~ sweat_shirt.img) }}" alt="{{ sweat_shirt.name }}" /> 
+        <div class="product-items">
+            <div class="product-info">
+                <div class="product-texts">
+                    <p class="product.name">{{ sweat_shirt.name }}</p>
+                    <p class="product-price">{{ sweat_shirt.price }} €</p> 
+                </div>
+                <form id="addToCart" action="" method="post">
+                    <div class="product-form-group">
+                        <label class="product-form-label" for="size">Taille</label><br/>
+                        <select class="product-form-sizes" id="size" name="size" size="5" required>
+                            {% if sweat_shirt.getStockXs > 0 %}
+                                <option value="stock_xs">XS</option>
+                            {% else %}
+                                <option value="stock_xs" disabled>XS</option>
+                            {% endif %} 
+                            {% if sweat_shirt.getStockS > 0 %}
+                                <option value="stock_s">S</option>
+                            {% else %}
+                                <option value="stock_s" disabled>S</option>
+                            {% endif %} 
+                            {% if sweat_shirt.getStockM > 0 %}
+                                <option value="stock_m">M</option>
+                            {% else %}
+                                <option value="stock_m" disabled>M</option>
+                            {% endif %} 
+                            {% if sweat_shirt.getStockL > 0 %}
+                                <option value="stock_l">L</option>
+                            {% else %}
+                                <option value="stock_l" disabled>L</option>
+                            {% endif %} 
+                            {% if sweat_shirt.getStockXl > 0 %}
+                                <option value="stock_xl">XL</option>
+                            {% else %}
+                                <option value="stock_xl" disabled>XL</option>
+                            {% endif %}
+                        </select>
+                    </div>
+                </form>
+            </div>
+            {% if sweat_shirt.getStockXs != 0 and 
+                sweat_shirt.getStockS != 0 and
+                sweat_shirt.getStockM != 0 and
+                sweat_shirt.getStockL != 0 and
+                sweat_shirt.getStockXl != 0
+            %}
+            <input class="product-submit" type="submit" value="AJOUTER AU PANIER" form="addToCart" />
+            {% else %}
+            <p class="product-disabled">Ce produit est actuellement indisponible</p>
+            {% endif %}
+        </div>   
+    </div>
+    <button class="product-link">
+        <a href="{{ path('app_sweat_index') }}">Retour à la liste des produits</a>
+    </button>
 
-    <a href="{{ path('app_sweat_shirt_index') }}">back to list</a>
-
-    <a href="{{ path('app_sweat_shirt_edit', {'id': sweat_shirt.id}) }}">edit</a>
-
-    {{ include('sweat_shirt/_delete_form.html.twig') }}
 {% endblock %}
