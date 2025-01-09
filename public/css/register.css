@@ -1,0 +1,66 @@
+.register-container {
+    width: 50%;
+    margin: auto;
+    border: 1px solid black;
+    padding: 2vw;
+}
+
+.register-title,
+.register-container label,
+.register-container input {
+    font-size: 2.5vw;
+    font-weight: 400;
+}
+
+.register-title {
+    text-align: start;
+    padding-bottom: 0;
+}
+
+.register-container form {
+    border-top: 1px solid #007FFF;
+    border-bottom: 1px solid #007FFF;
+    margin-bottom: 2vw;
+}
+
+.register-container form div {
+    margin: 1vw 0;
+}
+
+.register-container form div:nth-child(3) {
+    margin: 2.5vw 0 5vw 0;
+}
+
+.register-txt {
+    margin-bottom: 1vw;
+}
+
+.register-container form button {
+    margin-top: 1vw;
+    padding-left: 1vw;
+}
+
+.register-container form button,
+.register-link {
+    color: white;
+}
+
+.register-container button {
+    font-size: 3vw;
+    background-color: #007FFF;
+    border-radius: 5%/30%;
+    border-color: #007FFF;
+    border-style: none;
+    font-weight: 800;
+    margin-bottom: 2vw;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+}
+
+@media screen and (min-width:768px) {
+    
+    .register-container {
+        width: 40%;
+    }
+
+}
