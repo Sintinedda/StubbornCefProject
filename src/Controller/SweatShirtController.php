@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\OrderItem;
 use App\Entity\SweatShirt;
+use App\Form\SweatBisType;
 use App\Form\SweatType;
 use App\Repository\SweatShirtRepository;
 use App\Service\FileUploader;
@@ -28,7 +30,7 @@ final class SweatShirtController extends AbstractController
         Request $request, 
         EntityManagerInterface $entityManager,
         FileUploader $fileUploader
-        ): Response {
+    ): Response {
         $newSweat = new SweatShirt();
         $addSweatForm = $this->createForm(SweatType::class, $newSweat);
         $addSweatForm->handleRequest($request);
@@ -46,9 +48,26 @@ final class SweatShirtController extends AbstractController
         }
     }
 
-    #[Route('/{id}', name: 'app_sweat_show', methods: ['GET'])]
-    public function show(SweatShirt $sweatShirt): Response
-    {
+    #[Route('/{id}', name: 'app_sweat_show', methods: ['GET', 'POST'])]
+    public function show(
+        SweatShirt $sweatShirt,
+        EntityManagerInterface $entityManager,
+        Request $request
+    ): Response {
+
+        if ($request->getMethod() == Request::METHOD_POST) {
+
+            $item = new OrderItem();
+            $size = trim($request->get('size'));
+            $item->setSweat($sweatShirt)->setSize($size);
+            $entityManager->persist($item);
+            
+            $entityManager->flush();
+            $this->addFlash('success', 'sweat.ordered_successfully');
+
+            return $this->redirectToRoute('app_cart_add', ['id' => $item->getId()], Response::HTTP_SEE_OTHER);
+        }
+
         return $this->render('sweat_shirt/show.html.twig', [
             'sweat_shirt' => $sweatShirt,
         ]);
@@ -58,20 +77,26 @@ final class SweatShirtController extends AbstractController
     public function edit(
         Request $request,
         SweatShirt $sweatShirt,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        FileUploader $fileUploader
     ): Response {
 
-        $editForm = $this->createForm(SweatType::class, $sweatShirt);
+        $editForm = $this->createForm(SweatBisType::class, $sweatShirt);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $imgFile = $editForm -> get('img') -> getData();
+            if ($imgFile) { 
+                $imgFileName = $fileUploader -> upload($imgFile);
+                $sweatShirt -> setImg($imgFileName);
+            }
             $entityManager->flush();
 
             return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
         }
     }
 
-    #[Route('/{id}', name: 'app_sweat_delete', methods: ['POST'])]
+    #[Route('/{id}/delete', name: 'app_sweat_delete', methods: ['POST'])]
     public function delete(Request $request, SweatShirt $sweatShirt, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$sweatShirt->getId(), $request->getPayload()->getString('_token'))) {
@@ -79,6 +104,6 @@ final class SweatShirtController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_sweat_shirt_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_admin', [], Response::HTTP_SEE_OTHER);
     }
 }

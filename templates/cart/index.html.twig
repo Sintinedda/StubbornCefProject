@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="cart-title">Mon panier</h1>
+
+    {% if cart|length > 0 %}
+
+        {% set total = null %}
+
+        {% for item in cart %}
+
+            {% set total = total + (item.product.sweat.price * item.quantity) %}
+
+            <div class="cart-product-card">
+                <div class="cart-product-layer">
+                    <div class="cart-product-info">
+                        <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.product.sweat.img) }}" alt="sweat-shirt" />
+                        <div class="cart-product-details">
+                            <p class="cart-product-name">{{ item.product.sweat.name }}</p>
+                            <p class="cart-product-price"><b>Prix :</b> {{ item.product.sweat.price }} €</p>
+                            <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.product.size }}</span></p>
+                        </div>
+                    </div>
+                    <p class="cart-product-delete">
+                        <a class="cart-product-delete-link" href="{{ path('app_cart_del', { 'id': item.product.id }) }}">Retirer du panier</a>
+                    </p>
+                </div>
+            </div>
+
+        {% endfor %}
+            <div class="cart-bottom">
+                <p class="cart-total"><span class="cart-total-box">Total : {{ total }} €</span></p>
+                <div class="cart-btns">
+                    <p>
+                        <a class="cart-validate-command" href="">Finaliser ma commande</a>
+                    </p>
+                    <p>
+                        <a class="cart-redirect-products" href="{{ path('app_sweat_index') }}">Continuer mes achats</a>
+                    </p>
+                </div>
+            </div>
+
+    {% else %}
+
+        <p>Votre panier est vide</p>
+        
+    {% endif %}
+
+{% endblock %}

@@ -17,48 +17,48 @@
                     <p class="product.name">{{ sweat_shirt.name }}</p>
                     <p class="product-price">{{ sweat_shirt.price }} €</p> 
                 </div>
-                <form id="addToCart" action="" method="post">
+                <form id="addToCart" action="{{ path('app_sweat_show', { 'id': sweat_shirt.id }) }}" method="post">
                     <div class="product-form-group">
                         <label class="product-form-label" for="size">Taille</label><br/>
                         <select class="product-form-sizes" id="size" name="size" size="5" required>
                             {% if sweat_shirt.getStockXs > 0 %}
-                                <option value="stock_xs">XS</option>
+                                <option value="xs">XS</option>
                             {% else %}
-                                <option value="stock_xs" disabled>XS</option>
+                                <option value="xs" disabled>XS</option>
                             {% endif %} 
                             {% if sweat_shirt.getStockS > 0 %}
-                                <option value="stock_s">S</option>
+                                <option value="s">S</option>
                             {% else %}
-                                <option value="stock_s" disabled>S</option>
+                                <option value="s" disabled>S</option>
                             {% endif %} 
                             {% if sweat_shirt.getStockM > 0 %}
-                                <option value="stock_m">M</option>
+                                <option value="m">M</option>
                             {% else %}
-                                <option value="stock_m" disabled>M</option>
+                                <option value="m" disabled>M</option>
                             {% endif %} 
                             {% if sweat_shirt.getStockL > 0 %}
-                                <option value="stock_l">L</option>
+                                <option value="l">L</option>
                             {% else %}
-                                <option value="stock_l" disabled>L</option>
+                                <option value="l" disabled>L</option>
                             {% endif %} 
                             {% if sweat_shirt.getStockXl > 0 %}
-                                <option value="stock_xl">XL</option>
+                                <option value="xl">XL</option>
                             {% else %}
-                                <option value="stock_xl" disabled>XL</option>
+                                <option value="xl" disabled>XL</option>
                             {% endif %}
                         </select>
                     </div>
                 </form>
             </div>
-            {% if sweat_shirt.getStockXs != 0 and 
-                sweat_shirt.getStockS != 0 and
-                sweat_shirt.getStockM != 0 and
-                sweat_shirt.getStockL != 0 and
-                sweat_shirt.getStockXl != 0
+            {% if sweat_shirt.getStockXs == 0 and 
+                sweat_shirt.getStockS == 0 and
+                sweat_shirt.getStockM == 0 and
+                sweat_shirt.getStockL == 0 and
+                sweat_shirt.getStockXl == 0
             %}
-            <input class="product-submit" type="submit" value="AJOUTER AU PANIER" form="addToCart" />
+                <p class="product-disabled">Ce produit est actuellement indisponible</p>
             {% else %}
-            <p class="product-disabled">Ce produit est actuellement indisponible</p>
+                <input class="product-submit" type="submit" value="AJOUTER AU PANIER" form="addToCart" />
             {% endif %}
         </div>   
     </div>
