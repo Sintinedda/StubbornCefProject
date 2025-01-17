@@ -1,0 +1,140 @@
+.cart-product-card {
+    margin-bottom: 5vw;
+    border: 1px solid black;
+}
+
+.cart-product-layer {
+    margin: 2vw;
+}
+
+.cart-title {
+    font-size: 7vw;
+}
+
+.cart-product-info {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 4vw;
+}
+
+.cart-product-img,
+.cart-product-details {
+    flex: auto;
+}
+
+.cart-product-img {
+    width: 40%;
+}
+
+.cart-product-details {
+    font-size: 4vw;
+    text-align: end;
+}
+
+.cart-product-name {
+    font-size: 5vw;
+    font-weight: 700;
+    padding-bottom: 2vw;
+}
+
+.cart-product-size-uppercase,
+.cart-product-delete,
+.cart-validate-command,
+.cart-redirect-products,
+.cart-total {
+    text-transform: uppercase;
+}
+
+.cart-product-delete {
+    text-align: center;
+}
+
+.cart-product-delete-link,
+.cart-validate-command,
+.cart-redirect-products,
+.cart-total-box {
+    border: 1px solid black; 
+}
+
+.cart-product-delete-link,
+.cart-validate-command,
+.cart-redirect-products {
+    border-radius: 5%/20%;
+    padding: 1vw 2vw;
+}
+
+.cart-btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.cart-total {
+    text-align: right;
+}
+
+.cart-total-box {
+    padding: 1vw 5vw;
+}
+
+@media screen and (min-width:768px) {
+
+    .cart-product-layer {
+        margin: 3vw;
+        margin-bottom: -6vw;
+    } 
+
+    .cart-product-img {
+        width: 25%;
+    }
+
+    .cart-product-details {
+        display: flex;
+        justify-content: space-around;
+        font-size: 3vw;
+    }
+
+    .cart-product-name {
+        font-size: 3vw;
+    }
+
+    .cart-product-delete {
+        position: relative;
+        right: -30vw;
+        top: -10vw;
+    }
+    
+    .cart-bottom {
+        display: flex;
+        justify-content: end;
+    }
+
+    .cart-total {
+        margin-right: 3vw;
+        margin-top: 1vw;
+    }
+
+    .cart-btns {
+        display: block;
+    }
+
+    .cart-validate-command,
+    .cart-redirect-products {
+        display: block;
+        width: 38vw;
+        text-align: center;
+    }
+
+}
+
+@media screen and (min-width:992px) {
+    
+    .cart-product-img {
+        width: 10%;
+    }
+
+    .cart-validate-command,
+    .cart-redirect-products {
+        width: 25vw;
+    }
+
+}

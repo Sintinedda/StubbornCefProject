@@ -1,4 +1,4 @@
-function editImg(img, input) {
-    document.getElementById(input).style.display = 'none';
-    document.getElementById(img).style.display = 'block';
+function editImg(input, img) {
+    document.getElementById(input).style.display = 'block';
+    document.getElementById(img).style.display = 'none';
 }

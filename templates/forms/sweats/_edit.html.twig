@@ -1,6 +1,6 @@
 {% for sweat in sweats %}
     <div class="form-container edit-form">
-        {{ form_start(array_forms[loop.index0]) }}
+        {{ form_start(array_forms[loop.index0], { 'action': path('app_sweat_edit', {'id': sweat.id}) }) }}
             <div>
                 <label for="img-{{ sweat.id }}" onclick="editImg('img-{{ sweat.id }}', 'form-img-{{ sweat.id }}')">
                     <img src="{{ asset('/uploads/images/' ~ sweat.img) }}" id="form-img-{{ sweat.id }}" class="form-img" alt="Sweat {{ sweat.name }}"/>
@@ -17,10 +17,8 @@
                 {{ form_row(array_forms[loop.index0].stock_xl, { 'label': 'Stock XL'}) }}
                 {{ form_row(array_forms[loop.index0].isTop, { 'label': 'Top' }) }}
             </div>
-            <div class="edit-form-submits">
-                <input class="edit-form-submit" type="submit" value="Modifier" action="/sweat/shirt/{{ sweat.id }}/edit" />
-                <input type="submit" value="Supprimer" action="/sweat/shirt/{{ sweat.id }}" />
-            </div>
+            <input class="edit-form-submit" type="submit" value="Modifier" />
         {{ form_end(array_forms[loop.index0]) }}
+        {{ include('forms/sweats/_delete.html.twig') }}
     </div>
 {% endfor %}

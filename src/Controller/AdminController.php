@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\AdminUser;
 use App\Entity\SweatShirt;
 use App\Form\SweatType;
+use App\Form\SweatBisType;
 use App\Repository\SweatShirtRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,7 +29,7 @@ class AdminController extends AbstractController
         $addSweatForm -> handleRequest($request);
 
         foreach ($sweats as $editSweat) {
-            $editSweatForms = $this -> createForm(SweatType::class, $editSweat) -> createView();
+            $editSweatForms = $this -> createForm(SweatBisType::class, $editSweat) -> createView();
             $arrayForms[] = $editSweatForms;
         }
         
