@@ -33,6 +33,9 @@ security:
                 enable_csrf: true
                 default_target_path: app_login_redirect
             entry_point: form_login
+            logout:
+                path: /logout
+                target: app_home
             # https://symfony.com/doc/current/security/impersonating_user.html
             # switch_user: true
 
