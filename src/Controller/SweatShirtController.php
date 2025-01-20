@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Data\SearchData;
 use App\Entity\OrderItem;
 use App\Entity\SweatShirt;
+use App\Form\SearchType;
 use App\Form\SweatBisType;
 use App\Form\SweatType;
 use App\Repository\SweatShirtRepository;
@@ -18,10 +20,17 @@ use Symfony\Component\Routing\Attribute\Route;
 final class SweatShirtController extends AbstractController
 {
     #[Route('s', name: 'app_sweat_index', methods: ['GET'])]
-    public function index(SweatShirtRepository $sweatShirtRepository): Response
-    {
+    public function index(
+        SweatShirtRepository $sweatShirtRepository,
+        Request $request   
+    ): Response {
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $sweatShirt = $sweatShirtRepository->findSearch($data);
         return $this->render('sweat_shirt/index.html.twig', [
-            'sweat_shirts' => $sweatShirtRepository->findAll(),
+            'sweat_shirts' => $sweatShirt,
+            'form' => $form->createView()
         ]);
     }
 

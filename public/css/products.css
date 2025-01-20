@@ -1,10 +1,32 @@
+.product-filter-title {
+    font-size: 3vw;
+}
+
+.product-filter-by-price {
+    display: flex;
+}
+
+.product-filter-by-price input {
+    width: 15vw;
+    margin-right: 2vw;
+    font-size: 2vw;
+}
+
+.product-filter-btn {
+    margin-left: 5vw;
+    font-size: 2.5vw;
+    border: none;
+    border-radius: 5%/15%;
+    padding: 0 2vw;
+}
+
 .cards-container {
-    margin: 20px;
-    padding-bottom: 30px;
+    margin: 4vw;
+    padding-bottom: 6vw;
 }
 
 .col {
-    margin-bottom: 30px;
+    margin-bottom: 6vw;
 }
 
 .card {
@@ -13,7 +35,7 @@
 
 .card-img {
     width: 100%;
-    padding: 20px 10px;
+    padding: 3vw 1.5vw;
 }
 
 .card-body {
@@ -34,13 +56,20 @@
 .card-name,
 .card-price {
     text-align: start;
-    margin-left: 30px;
+    margin-left: 6vw;
 }
 
 .card-link-to-product {
     width: 15vw;
 }
 
+@media screen and (min-width:768px) {
+    
+    .product-filter-title {
+        font-size: 2vw;
+    }
+
+}
 @media screen and (min-width:992px) {
     
     .card-name {

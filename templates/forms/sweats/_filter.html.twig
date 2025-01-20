@@ -1,0 +1,12 @@
+<div class="product-filter">
+    {{ form_start(form) }}
+
+        <h2 class="product-filter-title">Filtrer par prix</h4>
+        <div class="product-filter-by-price">
+            {{ form_row(form.min) }}
+            {{ form_row(form.max) }}
+            <button type="submit" class="product-filter-btn">Filtrer</button>
+        </div>
+
+    {{ form_end(form) }}
+</div>
