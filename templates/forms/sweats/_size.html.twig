@@ -1,0 +1,32 @@
+<form id="addToCart" action="{{ path('app_sweat_show', { 'id': sweat_shirt.id }) }}" method="post">
+    <div class="product-form-group">
+        <label class="product-form-label" for="size">Taille</label><br/>
+        <select class="product-form-sizes" id="size" name="size" size="5" required>
+            {% if sweat_shirt.getStockXs > 0 %}
+                <option value="xs">XS</option>
+            {% else %}
+                <option value="xs" disabled>XS</option>
+            {% endif %} 
+            {% if sweat_shirt.getStockS > 0 %}
+                <option value="s">S</option>
+            {% else %}
+                <option value="s" disabled>S</option>
+            {% endif %} 
+            {% if sweat_shirt.getStockM > 0 %}
+                <option value="m">M</option>
+            {% else %}
+                <option value="m" disabled>M</option>
+            {% endif %} 
+            {% if sweat_shirt.getStockL > 0 %}
+                <option value="l">L</option>
+            {% else %}
+                <option value="l" disabled>L</option>
+            {% endif %} 
+            {% if sweat_shirt.getStockXl > 0 %}
+                <option value="xl">XL</option>
+            {% else %}
+                <option value="xl" disabled>XL</option>
+            {% endif %}
+        </select>
+    </div>
+</form>

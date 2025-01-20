@@ -16,7 +16,7 @@
     <body class="body" id="{% block body_id %}{% endblock %}">
 
         {% block header %}
-            {% include '_nav.html.twig' %}
+            {{ render(controller('App\\Controller\\NavController::nav', { 'route': app.request.attributes.get('_route') })) }}
         {% endblock %}
 
         {% block body %}
