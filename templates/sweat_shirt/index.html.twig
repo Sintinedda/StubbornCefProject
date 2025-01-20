@@ -9,6 +9,8 @@
 
 {% block body %}
 
+    {% include 'forms/sweats/_filter.html.twig' %}
+    
     <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 cards-container">
         {% for sweat_shirt in sweat_shirts %}
             <div class="col">
@@ -19,7 +21,7 @@
                             <p class="card-name">{{ sweat_shirt.name }}</p>
                             <p class="card-price">{{ sweat_shirt.price }} €</p>
                         </div>
-                        <a href="{{ path('app_sweat_show', {'id': sweat_shirt.id}) }}">
+                        <a href="{{ path('app_sweat_show', { 'id': sweat_shirt.id }) }}">
                             <input class="card-link-to-product" type="button" value="Voir" />
                         </a>
                     </div>
