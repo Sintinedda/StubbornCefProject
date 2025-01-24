@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+
+    <h1 class="cart-title">Commande {{ order.reference }}</h1>
+    <p>Votre commande à été validée avec succès.</p>
+
+    <h2>Récapitulatif de ma commande.</h2>
+    <p><span>Nom du destinataire : </span>{{ order.user.name }}</p>
+    <p><span>Adresse mail de contact : </span>{{ order.user.email }}</p>
+    <p><span>Adresse de livraison : </span>{{ order.user.deliveryAddress }}</p>
+
+
+        {% set total = null %}
+
+        {% for item in details %}
+
+            {% set total = total + item.price * item.quantity %}
+            {% set totalProd = item.price * item.quantity %}
+
+            <div class="cart-product-card">
+                <div class="cart-product-layer">
+                    <div class="cart-product-info">
+                        <div>
+                            <div class="cart-product-details">
+                                <p class="cart-product-name">{{ item.product }}</p>
+                                <p class="cart-product-price"><b>Prix :</b> {{ item.price }} €</p>
+                                <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.size }}</span></p>
+                                <p class="cart-product-size"><b>Quantité :</b> {{ item.quantity }}</span></p>
+                                <p class="cart-total"><span class="cart-total-box">Total : {{ totalProd }} €</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% endfor %}
+            <div class="cart-bottom">
+                <p class="cart-total"><span class="cart-total-box">Total commande : {{ total }} €</span></p>
+                <div class="cart-btns">
+                    <p>
+                        <a class="cart-redirect-products" href="{{ path('app_home') }}">Retour à l'accueil</a>
+                    </p>
+                </div>
+            </div>
+
+{% endblock %}
