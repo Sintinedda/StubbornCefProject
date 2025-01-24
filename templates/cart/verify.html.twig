@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="cart-title">Vérification de la commande</h1>
+
+    <h2>Mes informations personnelles</h2>
+    <p>Nom : {{ user.name }}</p>
+    <p>Adresse de livraison : {{ user.deliveryAddress }}</p>
+    <p>Adresse mail : {{ user.email }}</p>
+
+    <h2>Récapitulatif de la commande</h2>
+
+    {% set total = null %}
+
+    {% for item in recapCart %}
+
+        {% set total = total + (item.product.sweat.price * item.quantity) %}
+        {% set totalProd = item.product.sweat.price * item.quantity %}
+
+        <div class="cart-product-card">
+            <div class="cart-product-layer">
+                <div class="cart-product-info">
+                    <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.product.sweat.img) }}" alt="sweat-shirt" />
+                    <div>
+                        <div class="cart-product-details">
+                            <p class="cart-product-name">{{ item.product.sweat.name }}</p>
+                            <p class="cart-product-price"><b>Prix :</b> {{ item.product.sweat.price }} €</p>
+                            <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.product.size }}</span></p>
+                        </div>
+                        <div>
+                            <p class="cart-product-size"><b>Quantité :</b> {{ item.quantity }}</span></p>
+                            <p class="cart-total"><span class="cart-total-box">Total : {{ totalProd }} €</span></p>
+                        </div>
+                    </div>
+                </div>
+                {% if 
+                    item.product.size == 'xs' and item.product.sweat.stockXs < item.quantity or
+                    item.product.size == 's' and item.product.sweat.stockS < item.quantity  or
+                    item.product.size == 'm' and item.product.sweat.stockM < item.quantity or
+                    item.product.size == 'l' and item.product.sweat.stockL < item.quantity or
+                    item.product.size == 'xl' and item.product.sweat.stockXl < item.quantity 
+                %}
+                    <p>Ce produit n'est plus disponible dans la quantité demandée, veuillez retourner au panier pour modifier votre commande</p>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endfor %}
+
+    <div class="cart-bottom">
+        <p class="cart-total"><span class="cart-total-box">Total : {{ total }} €</span></p>
+        {% if message == false %}
+            <div class="cart-btns">
+                <p>
+                    <a href="{{ path('app_stripe', { reference: order.reference}) }}"/>Valider ma commande</a>
+                </p>
+            </div>
+        {% else %}
+            <p>{{ message }}</p>
+        {% endif %}
+        <p>
+            <a href="{{ path('app_cart') }}">Retour au panier</a>
+        </p>
+    </div>
+
+{% endblock %}

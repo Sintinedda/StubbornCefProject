@@ -65,14 +65,17 @@ final class SweatShirtController extends AbstractController
     ): Response {
 
         if ($request->getMethod() == Request::METHOD_POST) {
-
-            $item = new OrderItem();
             $size = trim($request->get('size'));
-            $item->setSweat($sweatShirt)->setSize($size);
-            $entityManager->persist($item);
-            
-            $entityManager->flush();
-            $this->addFlash('success', 'sweat.ordered_successfully');
+            $existingItem = $entityManager->getRepository(OrderItem::class)->findOneBy(['sweat' => $sweatShirt, 'size' => $size]);
+
+            if ($existingItem) {
+                $item = $existingItem;
+            } else {
+                $item = new OrderItem();
+                $item->setSweat($sweatShirt)->setSize($size);
+                $entityManager->persist($item);
+                $entityManager->flush();
+            }
 
             return $this->redirectToRoute('app_cart_add', ['id' => $item->getId()], Response::HTTP_SEE_OTHER);
         }

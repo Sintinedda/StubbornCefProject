@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon panier{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body %}
+
+
+    <p>Il semble qu'une erreur s'est produite lors de votre paiement.</p>
+    <p>Veuillez retourner au panier pour recommencer l'opération.</p>
+    <p>
+        <a href="{{ path('app_cart') }}">Retour au panier</a>
+    </p>
+
+{% endblock %}
