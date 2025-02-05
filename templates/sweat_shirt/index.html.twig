@@ -5,31 +5,39 @@
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('css/products.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/sweat-card.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'product-list' %}
 
-    {% include 'forms/sweats/_filter.html.twig' %}
+{% block main %}
+
+    <h1>Liste des produits</h1>
+
     
-    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 cards-container">
+    <div class="row align-items-center text-center cards-container">
+        <div class="col-sm-12 col-md-6 col-lg-4">
+            {% include 'forms/sweats/_filter.html.twig' %}
+        </div>
+
         {% for sweat_shirt in sweat_shirts %}
-            <div class="col">
-                <div class="card">
-                    <img class="card-img" src="{{ asset('/uploads/images/' ~ sweat_shirt.img) }}" alt="{{ sweat_shirt.name }}" />
-                    <div class="card-body">
-                        <div class="card-texts">
-                            <p class="card-name">{{ sweat_shirt.name }}</p>
-                            <p class="card-price">{{ sweat_shirt.price }} €</p>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="p-3 card-sweat">
+                    <img class="card-sweat-img" src="{{ asset('/uploads/images/' ~ sweat_shirt.img) }}" alt="Sweat du moment"/>
+                    <div class="card-sweat-body">
+                        <div class="card-sweat-text">
+                            <p class="card-sweat-name">{{ sweat_shirt.name }}</p>
+                            <p class="card-sweat-price"><strong>Prix : </strong>{{ sweat_shirt.price }} €</p>
                         </div>
-                        <a href="{{ path('app_sweat_show', { 'id': sweat_shirt.id }) }}">
-                            <input class="card-link-to-product" type="button" value="Voir" />
-                        </a>
+                            <a class="card-sweat-link" href="{{ path('app_sweat_show', { 'id': sweat_shirt.id }) }}">Voir</a>
                     </div>
                 </div>
             </div>
+
         {% else %}
             <p>Aucun produit trouvé</p>
         {% endfor %}
+
     </div>
 
 {% endblock %}

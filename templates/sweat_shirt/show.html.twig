@@ -7,7 +7,9 @@
     <link href="{{ asset('css/product.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'product' %}
+
+{% block main %}
 
     <div class="product-container">
         <img class="product-img" src="{{ asset('/uploads/images/' ~ sweat_shirt.img) }}" alt="{{ sweat_shirt.name }}" /> 

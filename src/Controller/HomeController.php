@@ -13,11 +13,12 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(EntityManagerInterface $entityManager): Response
     {   
-        $repository = $entityManager -> getRepository(SweatShirt::class);
-        $topSweatShirts = $repository -> findBy(['isTop'=> true]);
+        $repository = $entityManager->getRepository(SweatShirt::class);
+        $topSweatShirts = $repository->findBy(['isTop'=> true]);
         return $this->render('home.html.twig', [
             'controller_name' => 'HomeController',
-            'topSweatShirts' => $topSweatShirts
+            'topSweatShirts' => $topSweatShirts,
+            'user' => $this->getUser()
         ]);
     }
 }

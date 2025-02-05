@@ -32,6 +32,9 @@ class OrderDetails
     #[ORM\Column(length: 255)]
     private ?string $size = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $img = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +108,18 @@ class OrderDetails
     public function setSize(string $size): static
     {
         $this->size = $size;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): static
+    {
+        $this->img = $img;
 
         return $this;
     }

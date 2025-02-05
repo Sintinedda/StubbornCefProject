@@ -1,12 +1,17 @@
 .forms-container {
     width: 100%;
-    margin: 40px 0;
 }
 
 .form-container {
     margin: auto;
     text-align: center;
-    padding: 20px 0;
+    margin: 20px 0;
+    border: 5px solid orange;
+    padding: 10px 0;
+}
+
+.form-container:first-child {
+    margin-top: 0;
 }
 
 form {
@@ -17,32 +22,97 @@ form {
     display: table;
 }
 
-form div {
+.table-form div {
     display: table-row;
     margin: auto;
 }
 
-.add-form-submit,
 .edit-form-submits {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
 }
 
-form div label {
+.table-form div label {
     display: table-cell;
     padding-right: 15px;
 }
 
-form div input {
+.table-form div input {
     margin: 5px 0;
     display: table-cell;
 }
 
 .form-img {
-    width: 50%;
+    width: 100%;
 }
 
-.edit-form input[type=file] {
+#add-form > div:first-child {
+    display: inline-block;
+    text-align: center;
+}
+
+#form-add-img {
+    margin: auto;
+}
+
+#form-add-img,
+.form-edit-img,
+.add-form-submit,
+.edit-form-submit,
+.delete-form-submit {
+    background-color: orange;
+    color: crimson;
+    padding: 5px 10px;
+    border-radius: 5%/25%;
+    border: none;
+
+}
+
+#form-add-img:hover,
+.form-edit-img:hover,
+.add-form-submit:hover,
+.edit-form-submit:hover,
+.delete-form-submit:hover {
+    background-color: orangered;
+    color: black;
+    font-weight: 800;
+}
+
+.edit-form-submit,
+.delete-form-submit {
+    margin: 0 10px;
+}
+
+.form-edit-img {
+    width: 50%;
+    padding: 0;
+}
+
+input[type=file] {
     display: none;
+    font-style: oblique;
+}
+
+input[type=file]::file-selector-button {
+    display: none;
+}
+
+@media screen and (min-width:768px) {
+    
+    .form-container {
+        width: 70%;
+        margin: 20px auto;
+    }
+
+    form div {
+        margin: 5px 0;
+    }
+
+    .form-edit-img,
+    #form-add-img {
+        width: 70%;
+    }
+
 }
 
 @media screen and (min-width:992px) {
@@ -50,11 +120,14 @@ form div input {
     form {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: start;
+        height: 14vw;
     }
 
     .form-container {
-        padding: 50px 0;
+        width: 100%;
+        padding: 20px 10px;
+        height: 16.5vw;
     }
     
     .table-form {
@@ -71,30 +144,41 @@ form div input {
         width: 80%;
     }
 
-    .add-form-submit, 
-    .edit-form-submits {
-        position: absolute;
-        right: 5vw;
-        width: 10vw;
-        margin-top: 10vw;
-
-    }
-
-    .edit-form-submits {
-        display: flex;
-        right: 140px;
-    }
-
-    .edit-form-submits:last-child {
-        margin-left: 50px;
-    }
-
-    .edit-form-input {
-        width: 100px;
-        margin: 0 10px;
-    }
-
     .form-img {
         width: 100%;
     }
+
+    #add-form div:first-child,
+    .edit-form form div:first-child {
+        width: 25%;
+        margin: auto;
+    }
+
+    input[type=file] {
+        width: 100%;
+    }
+
+    .form-delete {
+        height: auto;
+    }
+
+    .form-submits {
+        text-align: end;
+    }
+
+    .form-submits,
+    .edit-form-submits {
+        margin: -5vw 80px 0 0;
+    }
+
+    .edit-form-submits {
+        justify-content: end;
+    }
+
+    .add-form-submit,
+    .delete-form-submit,
+    .edit-form-submit {
+        padding: 10px 40px;
+    }
+
 }

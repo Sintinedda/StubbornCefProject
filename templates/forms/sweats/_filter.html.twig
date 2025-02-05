@@ -1,12 +1,14 @@
-<div class="product-filter">
-    {{ form_start(form) }}
-
-        <h2 class="product-filter-title">Filtrer par prix</h4>
-        <div class="product-filter-by-price">
-            {{ form_row(form.min) }}
-            {{ form_row(form.max) }}
-            <button type="submit" class="product-filter-btn">Filtrer</button>
+<div class="filter">
+    <form class="filter-form" method="get" action="{{ path('app_sweat_index') }}">
+        <div class="filter-group">
+            <label class="filter-label" for="range">Fourchette de prix</label>
+            <button class="filter-submit" type="submit">
+                <select class="filter-input" id="range" name="range" size="3">
+                    <option class="filter-option" value="one">10 à 29 €</option>
+                    <option class="filter-option" value="two">30 à 35 €</option>
+                    <option class="filter-option" value="three">35 à 50 €</option>
+                </select>
+            </button>
         </div>
-
-    {{ form_end(form) }}
+    </form>
 </div>

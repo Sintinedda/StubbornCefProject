@@ -4,21 +4,35 @@
 
 {% block stylesheets %}
     {{ parent () }}
-    <link href="{{ asset('css/home.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/sweat-card.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 {% block body_id 'home' %}
 
 {% block main %}
+
     <h1 class="home-title">Les sweat-shirts du moment !!!</h1>
     <div class="row align-items-center text-center cards-container">
+
         {% for topSweatShirt in topSweatShirts %}
-            <div class="col-sm-12 col-md-6 col-lg-4 card-sweat-shirt">
-            <a href="{{ path('app_sweat_show', { 'id': topSweatShirt.id }) }}"
-                <img class="top-sweat-shirt-img" src="{{ asset('/uploads/images/' ~ topSweatShirt.img) }}" alt="Sweat du moment"/>
-                <p class="top-sweat-shirt-name">{{ topSweatShirt.name }}</p>
-                <p class="top-sweat-shirt-price"><strong>Prix : </strong>{{ topSweatShirt.price }} $</p>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <div class="p-3 card-sweat">
+                    <img class="card-sweat-img" src="{{ asset('/uploads/images/' ~ topSweatShirt.img) }}" alt="Sweat du moment"/>
+                    <div class="card-sweat-body">
+                        <div class="card-sweat-text">
+                            <p class="card-sweat-name">{{ topSweatShirt.name }}</p>
+                            <p class="card-sweat-price"><strong>Prix : </strong>{{ topSweatShirt.price }} €</p>
+                        </div>
+
+                        {% if user is not null %}
+                            <a class="card-sweat-link" href="{{ path('app_sweat_show', { 'id': topSweatShirt.id }) }}">Voir</a>
+                        {% endif %}
+
+                    </div>
+                </div>
             </div>
         {% endfor %}
+
     </div>
+
 {% endblock %}

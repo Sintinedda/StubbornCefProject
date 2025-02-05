@@ -1,87 +1,39 @@
-.product-filter-title {
-    font-size: 3vw;
+.filter {
+    border: 2px solid orange;
+    margin: 0 auto 30px;
+    width: 50%;
 }
 
-.product-filter-by-price {
+.filter-group {
     display: flex;
+    flex-direction: column;
 }
 
-.product-filter-by-price input {
-    width: 15vw;
-    margin-right: 2vw;
-    font-size: 2vw;
+.filter-label {
+    font-weight: 600;
+    border-bottom: 2px solid orange;
+    padding: 5px 0;
 }
 
-.product-filter-btn {
-    margin-left: 5vw;
-    font-size: 2.5vw;
+.filter-submit {
+    padding: 0;
+}
+
+.filter-submit,
+.filter-input {
     border: none;
-    border-radius: 5%/15%;
-    padding: 0 2vw;
 }
 
-.cards-container {
-    margin: 4vw;
-    padding-bottom: 6vw;
-}
-
-.col {
-    margin-bottom: 6vw;
-}
-
-.card {
-    border: solid 2px black;
-}
-
-.card-img {
+.filter-input {
     width: 100%;
-    padding: 3vw 1.5vw;
+    padding: 5px 0 15px;
+    overflow-y: auto;
 }
 
-.card-body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.filter-option {
+    padding-left: 5px;
 }
 
-.card-name {
-    font-size: 4vw;
-    font-weight: 500;
-}
-
-.card-price {
-    font-size: 3vw;
-}
-
-.card-name,
-.card-price {
-    text-align: start;
-    margin-left: 6vw;
-}
-
-.card-link-to-product {
-    width: 15vw;
-}
-
-@media screen and (min-width:768px) {
-    
-    .product-filter-title {
-        font-size: 2vw;
-    }
-
-}
-@media screen and (min-width:992px) {
-    
-    .card-name {
-        font-size: 3vw;
-    }
-
-    .card-price {
-        font-size: 2.2vw;
-    }
-
-    .card-link-to-product {
-        width: 8vw;
-    }
-
+.filter-option:hover {
+    background-color: lightblue;
 }

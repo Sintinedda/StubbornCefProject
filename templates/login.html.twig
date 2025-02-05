@@ -4,6 +4,7 @@
 
 {% block stylesheets %}
     {{ parent () }}
+    <link href="{{ asset('css/register.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 {% block body_id 'login' %}
@@ -16,30 +17,29 @@
         </div>
     {% endif %}
     
-    <div class="login-card">
+    <div class="login-container">
         <form action="{{ path('app_login') }}" method="post">
             <fieldset>
-                <legend class="login-form-legend">Se connecter</legend>
-                <p><span class="form-login-span"></span></p>
-                <div class="login-form-group">
-                    <label for="username" class="login-form-label">Nom d'utilisateur</label>
+                <legend class="login-title">Se connecter</legend>
+                <div class="login-group">
+                    <label for="username" class="login-form-label">Nom d'utilisateur :</label>
                     <input type="text" id="username" name="_username" value="{{ last_username }}" class="login-form-input"/>
                 </div>
-                <div class="login-form-group">
-                    <label for="password" class="login-form-label">Mot de passe</label>
+                <div class="login-group">
+                    <label for="password" class="login-form-label">Mot de passe :</label>
                     <input type="password" id="password" name="_password" class="login-form-input"/>
                 </div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <input type="submit" value="Se Connecter" class="login-form-btn"/>
-                <p class="login-form-txt">
-                    <a class="login-form-link" href="">Mot de passe oublié</a>
+                <input type="submit" value="Se Connecter" class="login-btn"/>
+                <p class="login-txt-forget">
+                    <a class="login-forget-password" href="">Mot de passe oublié</a>
                 </p>
-                <p><span class="form-login-span"></span></p>
-                <p class="login-form-txt">Pas encore inscrit ?</p>
-                <button class="login-form-btn">
-                    <a href="">Créer un compte</a>
+                <p class="login-txt-register">Pas encore inscrit ?</p>
+                <button class="login-btn">
+                    <a class="login-to-register" href="{{ path('app_register') }}">Créer un compte</a>
                 </button>
             </fieldset>
         </form>
     </div>
+
 {% endblock %}

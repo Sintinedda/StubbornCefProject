@@ -5,37 +5,46 @@
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/cart-verify.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'success-command' %}
+
+{% block main %}
 
 
     <h1 class="cart-title">Commande {{ order.reference }}</h1>
     <p>Votre commande à été validée avec succès.</p>
 
-    <h2>Récapitulatif de ma commande.</h2>
-    <p><span>Nom du destinataire : </span>{{ order.user.name }}</p>
-    <p><span>Adresse mail de contact : </span>{{ order.user.email }}</p>
-    <p><span>Adresse de livraison : </span>{{ order.user.deliveryAddress }}</p>
-
+    <div class="cart-user-info">
+        <h2 class="cart-h2">Mes informations personnelles</h2>
+        <p><b>Nom :</b> {{ order.user.name }}</p>
+        <p><b>Adresse de livraison :</b> {{ order.user.deliveryAddress }}</p>
+        <p><b>Email de contact :</b> {{ order.user.email }}</p>
+    </div>
+    <div class="cart-recap">
+        <h2 class="cart-h2">Récapitulatif de la commande</h2>
 
         {% set total = null %}
 
-        {% for item in details %}
+        {% for item in products %}
 
             {% set total = total + item.price * item.quantity %}
             {% set totalProd = item.price * item.quantity %}
 
-            <div class="cart-product-card">
+            <div class="cart-product">
                 <div class="cart-product-layer">
-                    <div class="cart-product-info">
-                        <div>
+                    <div class="cart-product-layer">
+                        <div class="cart-product-info verif">
+                            <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.img) }}" alt="sweat-shirt" />
                             <div class="cart-product-details">
-                                <p class="cart-product-name">{{ item.product }}</p>
-                                <p class="cart-product-price"><b>Prix :</b> {{ item.price }} €</p>
-                                <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.size }}</span></p>
-                                <p class="cart-product-size"><b>Quantité :</b> {{ item.quantity }}</span></p>
-                                <p class="cart-total"><span class="cart-total-box">Total : {{ totalProd }} €</span></p>
+                                <div class="cart-product-detail">
+                                    <p class="cart-product-name">{{ item.product }}</p>
+                                    <p class="cart-product-price"><b>Prix :</b> {{ item.price }} €</p>
+                                    <p class="cart-product-size"><b>Taille :</b><span class="cart-product-size-uppercase"> {{ item.size }}</span></p>
+                                </div>
+                                <p class="cart-product-quantity-number verif"><b>Quantité :</b> {{ item.quantity }}</span></p>
+                                <p class="cart-product-total"><span class="cart-total-box"><b>Total :</b> {{ totalProd }} €</span></p>
                             </div>
                         </div>
                     </div>
@@ -43,13 +52,16 @@
             </div>
 
         {% endfor %}
-            <div class="cart-bottom">
-                <p class="cart-total"><span class="cart-total-box">Total commande : {{ total }} €</span></p>
-                <div class="cart-btns">
-                    <p>
-                        <a class="cart-redirect-products" href="{{ path('app_home') }}">Retour à l'accueil</a>
-                    </p>
-                </div>
-            </div>
+
+    </div>
+    <div class="cart-bottom">
+        <p class="cart-total"><span class="cart-total-box">Total panier : {{ total }} €</span></p>
+        <div class="cart-btns">
+            <p>
+            <a class="cart-redirect" href="{{ path('app_home') }}"><button class="cart-btn cart">Retour à l'accueil</button></a>
+            </p>
+        </div>
+    </div>
+    
 
 {% endblock %}

@@ -5,70 +5,91 @@
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('css/cart-verify.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'cart-verify' %}
+
+{% block main %}
 
     <h1 class="cart-title">Vérification de la commande</h1>
+    <div class="cart-user-info">
+        <h2 class="cart-h2">Mes informations personnelles</h2>
+        <p><b>Nom :</b> {{ user.name }}</p>
+        <p><b>Adresse de livraison :</b> {{ user.deliveryAddress }}</p>
+        <p><b>Email de contact :</b> {{ user.email }}</p>
+    </div>
+    <div class="cart-recap">
+        <h2 class="cart-h2">Récapitulatif de la commande</h2>
 
-    <h2>Mes informations personnelles</h2>
-    <p>Nom : {{ user.name }}</p>
-    <p>Adresse de livraison : {{ user.deliveryAddress }}</p>
-    <p>Adresse mail : {{ user.email }}</p>
+        {% set total = null %}
+        {% set totalProd = null %}
 
-    <h2>Récapitulatif de la commande</h2>
+        {% for item in recapCart %}
 
-    {% set total = null %}
+            {% set total = total + (item.product.sweat.price * item.quantity) %}
+            {% set totalProd = item.product.sweat.price * item.quantity %}
 
-    {% for item in recapCart %}
-
-        {% set total = total + (item.product.sweat.price * item.quantity) %}
-        {% set totalProd = item.product.sweat.price * item.quantity %}
-
-        <div class="cart-product-card">
-            <div class="cart-product-layer">
-                <div class="cart-product-info">
-                    <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.product.sweat.img) }}" alt="sweat-shirt" />
-                    <div>
-                        <div class="cart-product-details">
-                            <p class="cart-product-name">{{ item.product.sweat.name }}</p>
-                            <p class="cart-product-price"><b>Prix :</b> {{ item.product.sweat.price }} €</p>
-                            <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.product.size }}</span></p>
-                        </div>
-                        <div>
-                            <p class="cart-product-size"><b>Quantité :</b> {{ item.quantity }}</span></p>
-                            <p class="cart-total"><span class="cart-total-box">Total : {{ totalProd }} €</span></p>
+            <div class="cart-product">
+                <div class="cart-product-layer">
+                    <div class="cart-product-layer">
+                        <div class="cart-product-info verif">
+                            <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.product.sweat.img) }}" alt="sweat-shirt" />
+                            <div class="cart-product-details">
+                                <div class="cart-product-detail">
+                                    <p class="cart-product-name">{{ item.product.sweat.name }}</p>
+                                    <p class="cart-product-price"><b>Prix :</b> {{ item.product.sweat.price }} €</p>
+                                    <p class="cart-product-size"><b>Taille :</b><span class="cart-product-size-uppercase"> {{ item.product.size }}</span></p>
+                                </div>
+                                <p class="cart-product-quantity-number verif"><b>Quantité :</b> {{ item.quantity }}</span></p>
+                                <p class="cart-product-total"><span class="cart-total-box"><b>Total :</b> {{ totalProd }} €</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                {% if 
-                    item.product.size == 'xs' and item.product.sweat.stockXs < item.quantity or
-                    item.product.size == 's' and item.product.sweat.stockS < item.quantity  or
-                    item.product.size == 'm' and item.product.sweat.stockM < item.quantity or
-                    item.product.size == 'l' and item.product.sweat.stockL < item.quantity or
-                    item.product.size == 'xl' and item.product.sweat.stockXl < item.quantity 
-                %}
-                    <p>Ce produit n'est plus disponible dans la quantité demandée, veuillez retourner au panier pour modifier votre commande</p>
-                {% endif %}
+
+                    {% if 
+                        item.product.size == 'xs' and item.product.sweat.stockXs < item.quantity or
+                        item.product.size == 's' and item.product.sweat.stockS < item.quantity  or
+                        item.product.size == 'm' and item.product.sweat.stockM < item.quantity or
+                        item.product.size == 'l' and item.product.sweat.stockL < item.quantity or
+                        item.product.size == 'xl' and item.product.sweat.stockXl < item.quantity 
+                    %}
+                        <div class="cart-error">
+                            <p class="cart-error-txt">Ce produit n'est plus disponible dans la quantité demandée, veuillez retourner au panier pour modifier votre commande</p>
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% if message == false %}
+
+        <div class="cart-bottom">
+            <p class="cart-total"><span class="cart-total-box">Total panier : {{ total }} €</span></p>
+            <div class="cart-btns">
+                <p>
+                    <a class="cart-validate-command" href="{{ path('app_stripe', { reference: order.reference }) }}"><button class="cart-btn validate">Valider ma commande</button></a>
+                </p>
+                <p>
+                <a class="cart-redirect" href="{{ path('app_cart') }}"><button class="cart-btn cart">Retour au panier</button></a>
+                </p>
             </div>
         </div>
 
-    {% endfor %}
+    {% else %}
 
-    <div class="cart-bottom">
-        <p class="cart-total"><span class="cart-total-box">Total : {{ total }} €</span></p>
-        {% if message == false %}
-            <div class="cart-btns">
-                <p>
-                    <a href="{{ path('app_stripe', { reference: order.reference}) }}"/>Valider ma commande</a>
-                </p>
-            </div>
-        {% else %}
-            <p>{{ message }}</p>
-        {% endif %}
-        <p>
-            <a href="{{ path('app_cart') }}">Retour au panier</a>
-        </p>
-    </div>
+        <div class="cart-error-bottom">
+            <p class="cart-error-bottom-txt">{{ message }}</p>
+            <p class="cart">
+                <a class="cart-redirect" href="{{ path('app_cart') }}"><button class="cart-btn cart">Retour au panier</button></a>
+            </p>
+        </div>
+
+    {% endif %}
 
 {% endblock %}

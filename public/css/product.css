@@ -1,5 +1,7 @@
 .product-container {
-    padding-bottom: 8vw;
+    padding: 10px 20px 30px;
+    border: 1px solid orange;
+    margin-bottom: 20px;
 }
 
 .product-img {
@@ -39,10 +41,33 @@
     padding-left: 3vw;
 }
 
+.product-submit,
+.product-link {
+    background-color: orange;
+    padding: 5px 20px;
+    border-radius: 5%/25%;
+    border: none;
+}
+
+.product-submit:hover,
+.product-link:hover {
+        background-color: orangered;
+    font-weight: 800;
+}
+
+.product-link a,
 .product-submit {
-    display: block;
+    color: crimson;
+}
+
+.product-link a:hover,
+.product-submit:hover {
+    color: black;
+}
+
+.product-submit {
     margin: auto;
-    font-weight: 500;
+    display: block;
 }
 
 .product-disabled {
@@ -55,16 +80,11 @@
     margin: auto;
 }
 
-.product-submit,
-.product-link {
-    padding: 1vw 4vw;
-    border-radius: 5%/25%;
-}
-
 @media screen and (min-width:768px) {
     
     .product-container {
         display: flex;
+        border: 2px solid orange;
     }
 
     .product-img {

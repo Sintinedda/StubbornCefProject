@@ -1,7 +1,13 @@
 .nav-container {
+    background-color: orange;
+    margin: -30px -30px 0 -30px;
+    padding-bottom: 10px;
+}
+
+.nav-container-layer {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 30px;
+    padding: 30px 20px 30px 10px;
 }
 
 .nav-start,
@@ -22,11 +28,12 @@
 }
 
 .nav-menu-btn {
-    border: none;
+    border-radius: 5px;
+    background-color: #f0d1a2;
 }
 
 .nav-menu-icon:hover {
-    color: red;
+    color: crimson;
 }
 
 .nav-menu-list {
@@ -36,9 +43,10 @@
     list-style: none;
     position: absolute;
     left: 0;
-    top: 35vw;
-    background-color: brown;
+    top: 37vw;
+    background-color: orange;
     padding: 30px 0 30px 0;
+    border-top: 2px solid black;
 }
 
 .nav-menu-item {
@@ -48,14 +56,21 @@
 .active a {
     font-weight: 700;
     text-decoration: underline;
+    color: crimson;
 }
 
 .nav-menu-item:first-child {
     padding-top: 0;
 }
 
+.nav-menu-link {
+    font-size: 3vw;
+}
+
 .nav-menu-link:hover {
-    color: red;
+    color: orangered;
+    font-size: 3.5vw;
+    font-weight: 700;
 }
 
 .nav-menu-span {
@@ -65,16 +80,18 @@
     width: 50px;
 }
 
-
-
 @media screen and (min-width:768px) {
 
     .nav-menu {
-        width: 60%;
+        width: 80%;
     }
 
     .nav-logo {
-        width: 60%;
+        width: 50%;
+    }
+
+    .nav-slogan {
+        font-size: 2vw;
     }
 
     .nav-menu-btn {
@@ -82,6 +99,7 @@
     }
 
     .nav-menu-list {
+        border-top: none;
         display: flex;
         justify-content: end;
         position: relative;
@@ -90,7 +108,19 @@
     }
 
     .nav-menu-item {
-        padding: 0 10px;
+        padding: 0 5px;
+    }
+
+    .nav-menu-link {
+        font-size: 2.5vw;    
+    }
+
+    .nav-menu-link:hover {
+        font-size: 3vw;    
+    }
+
+    .logout {
+        margin-left: 15px;
     }
 
     .nav-menu-span {
@@ -101,12 +131,16 @@
 
 @media screen and (min-width:992px) {
     
+    .nav-menu {
+        width: 60%;
+    }
+
     .nav-start {
         width: 30%;
     }
 
     .nav-menu-item {
-        font-size: 2vw;
+        padding: 0 10px;
     }
 
 }
