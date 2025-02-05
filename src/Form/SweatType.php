@@ -18,7 +18,8 @@ class SweatType extends AbstractType
     {
         $builder
             ->add('img', FileType::class, array(
-                'label' => false,
+                'label' => 'Ajouter une image',
+                'label_attr' => array('id' => 'form-add-img'),
                 'mapped' =>false,
                 'constraints' => [
                     new File([

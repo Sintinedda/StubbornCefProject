@@ -2,14 +2,12 @@
 
 namespace App\Controller;
 
-use App\Data\SearchData;
 use App\Entity\OrderItem;
 use App\Entity\SweatShirt;
-use App\Form\SearchType;
 use App\Form\SweatBisType;
 use App\Form\SweatType;
-use App\Repository\SweatShirtRepository;
 use App\Service\FileUploader;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,16 +19,34 @@ final class SweatShirtController extends AbstractController
 {
     #[Route('s', name: 'app_sweat_index', methods: ['GET'])]
     public function index(
-        SweatShirtRepository $sweatShirtRepository,
-        Request $request   
+        Request $request,
+        EntityManagerInterface $entityManager  
     ): Response {
-        $data = new SearchData();
-        $form = $this->createForm(SearchType::class, $data);
-        $form->handleRequest($request);
-        $sweatShirt = $sweatShirtRepository->findSearch($data);
+        if ($request->getMethod() == Request::METHOD_GET) {
+            $range = trim($request->get('range'));
+            $crit = new Criteria();
+
+            if ($range == "one") {
+                $crit
+                    ->where(Criteria::expr()->gte('price', 10))
+                    ->andWhere(Criteria::expr()->lte('price', 29));
+                $sweatShirt = $entityManager->getRepository(SweatShirt::class)->matching($crit);
+            } else if ($range == "two") {
+                $crit
+                    ->where(Criteria::expr()->gte('price', 30))
+                    ->andWhere(Criteria::expr()->lte('price', 35));
+                $sweatShirt = $entityManager->getRepository(SweatShirt::class)->matching($crit);
+            } else if ($range == "three") {
+                $crit
+                    ->where(Criteria::expr()->gte('price', 35))
+                    ->andWhere(Criteria::expr()->lte('price', 50));
+                $sweatShirt = $entityManager->getRepository(SweatShirt::class)->matching($crit);
+            } else {
+                $sweatShirt = $entityManager->getRepository(SweatShirt::class)->findAll();
+            }
+        }
         return $this->render('sweat_shirt/index.html.twig', [
-            'sweat_shirts' => $sweatShirt,
-            'form' => $form->createView()
+            'sweat_shirts' => $sweatShirt
         ]);
     }
 

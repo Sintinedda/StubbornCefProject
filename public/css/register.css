@@ -1,66 +1,118 @@
-.register-container {
+.register-container,
+.login-container {
     width: 50%;
     margin: auto;
-    border: 1px solid black;
-    padding: 2vw;
+    border: 1px solid orange;
+    padding: 10px 5px;
 }
 
-.register-title,
-.register-container label,
-.register-container input {
-    font-size: 2.5vw;
-    font-weight: 400;
-}
-
+.login-title,
 .register-title {
-    text-align: start;
-    padding-bottom: 0;
+    margin-bottom: 5px;
 }
 
-.register-container form {
-    border-top: 1px solid #007FFF;
-    border-bottom: 1px solid #007FFF;
-    margin-bottom: 2vw;
+.login-title,
+.register-title,
+.login-btn,
+.register-btn {
+    font-size: 3vw;
 }
 
-.register-container form div {
-    margin: 1vw 0;
+.login-title,
+.register-title,
+.login-txt-forget {
+    padding-bottom: 5px;
+    border-bottom: 1px solid lightblue;
 }
 
-.register-container form div:nth-child(3) {
-    margin: 2.5vw 0 5vw 0;
+.login-group,
+.register-container > form > div {
+    margin-bottom: 5px;
 }
 
-.register-txt {
-    margin-bottom: 1vw;
+.login-btn,
+.register-btn {
+    margin: 0 0 5px 5px;
+    font-weight: 700;
+    background-color: rgb(51, 160, 223);
+    border: none;
+    padding: 3px 5px;
+    border-radius: 5%/25%;
 }
 
-.register-container form button {
-    margin-top: 1vw;
-    padding-left: 1vw;
-}
-
-.register-container form button,
-.register-link {
+.login-btn,
+.register-btn,
+.login-to-register,
+.register-to-connect {
     color: white;
 }
 
-.register-container button {
-    font-size: 3vw;
-    background-color: #007FFF;
-    border-radius: 5%/30%;
-    border-color: #007FFF;
-    border-style: none;
-    font-weight: 800;
-    margin-bottom: 2vw;
-    padding-top: 0.5vw;
-    padding-bottom: 0.5vw;
+.login-forget-password {
+    color: blue;
+    text-decoration: underline;
+}
+
+.login-txt-register,
+.register-txt {
+    padding-top: 10px;
 }
 
 @media screen and (min-width:768px) {
     
+    .login-container,
     .register-container {
         width: 40%;
+        padding: 20px 15px;
+    }
+
+    .login-title,
+    .register-title {
+        margin-bottom: 10px;
+    }
+    
+    .login-title,
+    .register-title
+    .login-txt-forget {
+        padding-bottom: 10px;
+        border-bottom: 2px solid lightblue;
+    }
+    
+    .login-group,
+    .register-container > form > div {
+        margin-bottom: 10px;
+    }
+    
+    .login-btn,
+    .register-btn {
+        margin: 0 0 10px 10px;
+        padding: 6px 10px;
+    }
+    
+    .login-txt-register,
+    .register-txt {
+        padding-top: 20px;
+    }
+
+}
+
+@media screen and (min-width:992px) {
+    
+    .login-container,
+    .register-container {
+        width: 25%;
+    }
+
+    .login-title,
+    .register-title,
+    .login-btn,
+    .register-btn {
+        font-size: 2vw;
+    }
+    
+    .login-title,
+    .register-title,
+    .login-txt-forget {
+        border-bottom: 3px solid lightblue;
     }
 
 }

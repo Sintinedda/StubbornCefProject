@@ -16,15 +16,17 @@
     <body class="body" id="{% block body_id %}{% endblock %}">
 
         {% block header %}
-            {{ render(controller('App\\Controller\\NavController::nav', { 'route': app.request.attributes.get('_route') })) }}
+            <header>
+                {{ render(controller('App\\Controller\\NavController::nav', { 'route': app.request.attributes.get('_route') })) }}
+            </header>
         {% endblock %}
 
         {% block body %}
-            {% block main %}{% endblock %}
+            <main>{% block main %}{% endblock %}</main>
         {% endblock %}
 
         {% block footer %}
-            {% include '_footer.html.twig'%}
+            <footer>{% include '_footer.html.twig'%}</footer>
         {% endblock %}
     </body>
 </html>

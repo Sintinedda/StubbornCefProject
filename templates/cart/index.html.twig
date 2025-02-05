@@ -7,35 +7,38 @@
     <link href="{{ asset('css/cart.css') }}" rel="stylesheet"/>
 {% endblock %}
 
-{% block body %}
+{% block body_id 'cart' %}
+
+{% block main %}
 
     <h1 class="cart-title">Mon panier</h1>
 
     {% if cart|length > 0 %}
 
         {% set total = null %}
+        {% set totalProd = null %}
 
         {% for item in cart %}
 
             {% set total = total + item.product.sweat.price * item.quantity %}
             {% set totalProd = item.product.sweat.price * item.quantity %}
 
-            <div class="cart-product-card">
+            <div class="cart-product">
                 <div class="cart-product-layer">
                     <div class="cart-product-info">
                         <img class="cart-product-img" src="{{ asset('uploads/images/' ~ item.product.sweat.img) }}" alt="sweat-shirt" />
-                        <div>
-                            <div class="cart-product-details">
+                        <div class="cart-product-details">
+                            <div class="cart-product-detail">
                                 <p class="cart-product-name">{{ item.product.sweat.name }}</p>
                                 <p class="cart-product-price"><b>Prix :</b> {{ item.product.sweat.price }} €</p>
-                                <p class="cart-product-size"><b>Taille :</b> <span class="cart-product-size-uppercase">{{ item.product.size }}</span></p>
+                                <p class="cart-product-size"><b>Taille :</b><span class="cart-product-size-uppercase"> {{ item.product.size }}</span></p>
                             </div>
-                            <div>
-                                <a href="{{ path('app_cart_dec', { id: item.product.id }) }}"><button>-</button></a>
-                                <p class="cart-product-size"><b>Quantité :</b> {{ item.quantity }}</span></p>
-                                <a href="{{ path('app_cart_add', { id: item.product.id }) }}"><button>+</button></a>
-                                <p class="cart-total"><span class="cart-total-box">Total : {{ totalProd }} €</span></p>
+                            <div class="cart-product-quantity">
+                                <a class="cart-product-quantity-dec" href="{{ path('app_cart_dec', { id: item.product.id }) }}"><button class="cart-product-quantity-btn">-</button></a>
+                                <p class="cart-product-quantity-number"><b>Quantité :</b> {{ item.quantity }}</span></p>
+                                <a class="cart-product-quantity-inc" href="{{ path('app_cart_add', { id: item.product.id }) }}"><button class="cart-product-quantity-btn">+</button></a>
                             </div>
+                            <p class="cart-product-total"><span class="cart-total-box"><b>Total :</b> {{ totalProd }} €</span></p>
                         </div>
                     </div>
                     <p class="cart-product-delete">
@@ -45,21 +48,25 @@
             </div>
 
         {% endfor %}
+
             <div class="cart-bottom">
                 <p class="cart-total"><span class="cart-total-box">Total panier : {{ total }} €</span></p>
                 <div class="cart-btns">
                     <p>
-                        <a class="cart-validate-command" href="{{ path('app_cart_verify') }}">Finaliser ma commande</a>
+                        <a class="cart-validate-command" href="{{ path('app_cart_verify') }}"><button class="cart-btn validate">Finaliser ma commande</button></a>
                     </p>
                     <p>
-                        <a class="cart-redirect-products" href="{{ path('app_sweat_index') }}">Continuer mes achats</a>
+                        <a class="cart-redirect" href="{{ path('app_sweat_index') }}"><button class="cart-btn shop">Continuer mes achats</button></a>
                     </p>
                 </div>
             </div>
 
     {% else %}
 
-        <p>Votre panier est vide</p>
+        <p class="cart-empty">Votre panier est vide</p>
+        <p class="cart-empty-redirect">
+            <a class="cart-empty-redirect-link" href="{{ path('app_sweat_index') }}">Aller à la boutique</a>
+        </p>
         
     {% endif %}
 

@@ -1,0 +1,19 @@
+.cart-user-info {
+    padding-bottom: 20px;
+}
+
+.cart-h2 {
+    font-size: 3vw;
+    color: orangered;
+}
+
+.cart-error {
+    padding-top: 10px;
+    text-align: center;
+}
+
+.cart-error-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

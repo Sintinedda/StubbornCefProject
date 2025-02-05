@@ -88,6 +88,7 @@ class CartController extends AbstractController
             $orderDetails->setProduct($item['product']->getSweat()->getName());
             $orderDetails->setPrice($item['product']->getSweat()->getPrice());
             $orderDetails->setSize($item['product']->getSize());
+            $orderDetails->setImg($item['product']->getSweat()->getImg());
             $orderDetails->setTotalRecap($item['product']->getSweat()->getPrice() * $item['quantity']);
             
             $this->entityManager->persist($orderDetails);
@@ -212,9 +213,11 @@ class CartController extends AbstractController
             $this->entityManager->flush();
         }
 
+        $products = $order->getOrderdetails()->getValues();
+        
         return $this->render('cart/success.html.twig', [
             'order' => $order,
-            'details' => $order->getOrderdetails()->getValues()
+            'products' => $products
         ]);
     }
 

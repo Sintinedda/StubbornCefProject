@@ -9,40 +9,42 @@
 {% set _route = app.request.get('_route') %}
 
 <div class="nav-container">
-    <div class="nav-start">
-        <img class="nav-logo" src="{{ asset('img/Logo.png') }}" alt="Logo entreprise Stubborn" />
-        <p class="nav-slogan">Don't compromise on your look</p>
-    </div>
-    <div class="nav-menu">
-        <button class="nav-menu-btn" onclick="showMenu('menu-burger', 'menu-btn')" id="menu-btn">
-            <svg class="nav-menu-icon" xmlns="http://www.w3.org/2000/svg" width="5vw" height="6vw" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z"/></svg>
-        </button> 
-        <ul class="nav-menu-list" id="menu-burger">
-            <li class="nav-menu-item {% if route == "app_home" %} active {% endif %}">
-                <a class="nav-menu-link" href="{{ path('app_home') }}">Accueil</a>
-            </li>
-            <li><span class="nav-menu-span"></span></li>
-            {% if user is empty %}
-                <li class="nav-menu-item {% if route == "app_register" %} active {% endif %}">
-                    <a class="nav-menu-link" href="{{ path('app_register') }}">S'inscrire</a>
+    <div class="nav-container-layer">
+        <div class="nav-start">
+            <img class="nav-logo" src="{{ asset('img/Logo.png') }}" alt="Logo entreprise Stubborn" />
+            <p class="nav-slogan">Don't compromise on your look</p>
+        </div>
+        <div class="nav-menu">
+            <button class="nav-menu-btn" onclick="showMenu('menu', 'menu-btn')" id="menu-btn">
+                <svg class="nav-menu-icon" xmlns="http://www.w3.org/2000/svg" width="5vw" height="6vw" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z"/></svg>
+            </button> 
+            <ul class="nav-menu-list" id="menu">
+                <li class="nav-menu-item {% if route == "app_home" %} active {% endif %}">
+                    <a class="nav-menu-link" href="{{ path('app_home') }}">Accueil</a>
                 </li>
                 <li><span class="nav-menu-span"></span></li>
-                <li class="nav-menu-item {% if route == "app_login" %} active {% endif %}">
-                    <a class="nav-menu-link" href="{{ path('app_login') }}">Se connecter</a>
-                </li>
-            {% else %}
-                <li class="nav-menu-item {% if route == "app_sweat_index" %} active {% endif %}">
-                    <a class="nav-menu-link" href="{{ path('app_sweat_index') }}">Boutique</a>
-                </li>
-                <li><span class="nav-menu-span"></span></li>
-                <li class="nav-menu-item {% if route == "app_cart" %} active {% endif %}">
-                    <a class="nav-menu-link" href="{{ path('app_cart') }}">Panier</a>
-                </li>
-                <li><span class="nav-menu-span"></span></li>
-                <li class="nav-menu-item">
-                    <a class="nav-menu-link" href="{{ logout_path(key = null) }}">Se déconnecter</a>
-                </li>
-            {% endif %}
-        </ul>
+                {% if user is empty %}
+                    <li class="nav-menu-item {% if route == "app_register" %} active {% endif %}">
+                        <a class="nav-menu-link" href="{{ path('app_register') }}">S'inscrire</a>
+                    </li>
+                    <li><span class="nav-menu-span"></span></li>
+                    <li class="nav-menu-item {% if route == "app_login" %} active {% endif %}">
+                        <a class="nav-menu-link" href="{{ path('app_login') }}">Se connecter</a>
+                    </li>
+                {% else %}
+                    <li class="nav-menu-item {% if route == "app_sweat_index" %} active {% endif %}">
+                        <a class="nav-menu-link" href="{{ path('app_sweat_index') }}">Boutique</a>
+                    </li>
+                    <li><span class="nav-menu-span"></span></li>
+                    <li class="nav-menu-item {% if route == "app_cart" %} active {% endif %}">
+                        <a class="nav-menu-link" href="{{ path('app_cart') }}">Panier</a>
+                    </li>
+                    <li><span class="nav-menu-span"></span></li>
+                    <li class="nav-menu-item logout">
+                        <a class="nav-menu-link" href="{{ logout_path(key = null) }}">Se déconnecter</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 </div>

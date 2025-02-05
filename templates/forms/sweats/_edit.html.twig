@@ -1,24 +1,32 @@
 {% for sweat in sweats %}
     <div class="form-container edit-form">
-        {{ form_start(array_forms[loop.index0], { 'action': path('app_sweat_edit', {'id': sweat.id}) }) }}
+        {{ form_start(array_forms[loop.index0], 
+            { 'action': path('app_sweat_edit', { 'id': sweat.id }), 
+            'attr': {'id': 'edit-form-' ~ sweat.id} }) 
+        }}
             <div>
-                <label for="img-{{ sweat.id }}" onclick="editImg('img-{{ sweat.id }}', 'form-img-{{ sweat.id }}')">
-                    <img src="{{ asset('/uploads/images/' ~ sweat.img) }}" id="form-img-{{ sweat.id }}" class="form-img" alt="Sweat {{ sweat.name }}"/>
+                <label class="form-edit-img" id="form-label-{{ sweat.id }}" for="img-{{ sweat.id }}" 
+                    onclick="editImg('img-{{ sweat.id }}','form-img-{{ sweat.id }}','form-label-{{ sweat.id }}')">
+                        <img src="{{ asset('/uploads/images/' ~ sweat.img) }}"
+                            id="form-img-{{ sweat.id }}" class="form-img"
+                            alt="Sweat {{ sweat.name }}"/>
                 </label>
-            </div>
             {{ form_row(array_forms[loop.index0].img, { 'id': 'img-' ~ sweat.id }) }}
+            </div>
             <div class="table-form">
                 {{ form_row(array_forms[loop.index0].name, { 'label': 'Nom' }) }}
-                {{ form_row(array_forms[loop.index0].price, { 'label': 'Prix'}) }}
-                {{ form_row(array_forms[loop.index0].stock_xs, { 'label': 'Stock XS'}) }}
-                {{ form_row(array_forms[loop.index0].stock_s, { 'label': 'Stock S'}) }}
-                {{ form_row(array_forms[loop.index0].stock_m, { 'label': 'Stock M'}) }}
-                {{ form_row(array_forms[loop.index0].stock_l, { 'label': 'Stock L'}) }}
-                {{ form_row(array_forms[loop.index0].stock_xl, { 'label': 'Stock XL'}) }}
+                {{ form_row(array_forms[loop.index0].price, { 'label': 'Prix €' }) }}
+                {{ form_row(array_forms[loop.index0].stock_xs, { 'label': 'Stock XS' }) }}
+                {{ form_row(array_forms[loop.index0].stock_s, { 'label': 'Stock S' }) }}
+                {{ form_row(array_forms[loop.index0].stock_m, { 'label': 'Stock M' }) }}
+                {{ form_row(array_forms[loop.index0].stock_l, { 'label': 'Stock L' }) }}
+                {{ form_row(array_forms[loop.index0].stock_xl, { 'label': 'Stock XL' }) }}
                 {{ form_row(array_forms[loop.index0].isTop, { 'label': 'Top' }) }}
             </div>
-            <input class="edit-form-submit" type="submit" value="Modifier" />
         {{ form_end(array_forms[loop.index0]) }}
-        {{ include('forms/sweats/_delete.html.twig') }}
+        <div class="edit-form-submits">
+            {{ include('forms/sweats/_delete.html.twig') }}
+            <input class="edit-form-submit" form="edit-form-{{ sweat.id }}" type="submit" value="MODIFIER" />
+        </div>
     </div>
 {% endfor %}

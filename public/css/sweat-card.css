@@ -1,0 +1,86 @@
+.cards-container {
+    margin: 20px;
+    padding-bottom: 30px;
+}
+
+.card-sweat {
+    background-color: orange;
+    margin-bottom: 30px;
+    padding-bottom: 30px;
+}
+
+.card-sweat-img {
+    width: 100%;
+    margin: 30px 0;
+}
+
+.card-sweat-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color:#f0d1a2;
+    padding: 0 10px;
+}
+
+.card-sweat-text {
+    padding: 10px 0;
+}
+
+.card-sweat-name,
+.card-sweat-link {
+    font-size: 4vw;
+    font-weight: 500;
+}
+
+.card-sweat-price {
+    font-size: 3vw;
+}
+
+.card-sweat-name,
+.card-sweat-price {
+    text-align: start;
+    padding: 10px 0;
+}
+
+.card-sweat-link {
+    background-color: orange;
+    color: crimson;
+    padding: 10px 20px;
+    border-radius: 5%/25%;
+}
+
+.card-sweat-link:hover {
+    background-color: orangered;
+    color: black;
+    font-weight: 800;
+}
+
+@media screen and (min-width:768px) {
+
+    .card-sweat-name,
+    .card-sweat-link {
+        font-size: 2.5vw;
+    }
+
+    .card-sweat-price {
+        font-size: 2vw;
+    }
+
+    .card-sweat-link {
+        padding: 10px 30px;
+    }
+
+}
+
+@media screen and (min-width:992px) {
+    
+    .card-sweat-name,
+    .card-sweat-link {
+        font-size: 2vw;
+    }
+
+    .card-sweat-price {
+        font-size: 1.5vw;
+    }
+
+}
